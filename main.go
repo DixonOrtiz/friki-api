@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 
 	authinfra "frikiapi/src/infraestructure/auth"
 	gormdb "frikiapi/src/infraestructure/db/gorm"
@@ -25,5 +27,6 @@ func main() {
 		gin.Default(),
 	)
 	router := layerAssembler.GetRouterConfigured()
-	router.Run()
+	port := fmt.Sprintf("127.0.0.1:%s", os.Getenv("PORT"))
+	router.Run(port)
 }

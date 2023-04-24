@@ -1,0 +1,6 @@
+- Repasar login (quitar el autoregister de las cuentas tipo tienda)
+- Endpoint de creación de tienda (omitir foto de perfil de momento)
+- Módulo de direcciones de Chile
+- Crear producto
+- Listar productos
+- Editar productos
