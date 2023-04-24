@@ -13,7 +13,7 @@ func (a *LayerAssembler) useMiddlewares() {
 
 	a.infraestructure.ProtectedRouter = a.infraestructure.Router.Group("/")
 	a.infraestructure.ProtectedRouter.Use(middlewares.ValidateToken())
-	a.infraestructure.ProtectedRouter.Use(middlewares.ValidateUser())
+	// a.infraestructure.ProtectedRouter.Use(middlewares.ValidateUser())
 }
 
 func (a *LayerAssembler) setAuthRouter() {
@@ -22,4 +22,5 @@ func (a *LayerAssembler) setAuthRouter() {
 }
 
 func (a *LayerAssembler) setUsersRouter() {
+	a.infraestructure.ProtectedRouter.GET("/test-user", a.controllers.User.TestUser)
 }

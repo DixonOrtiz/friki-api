@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -27,6 +26,5 @@ func main() {
 		gin.Default(),
 	)
 	router := layerAssembler.GetRouterConfigured()
-	port := fmt.Sprintf("127.0.0.1:%s", os.Getenv("PORT"))
-	router.Run(port)
+	router.Run(os.Getenv("PORT"))
 }
