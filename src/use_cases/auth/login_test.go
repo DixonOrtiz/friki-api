@@ -17,7 +17,6 @@ func TestSuccessfulLogin(t *testing.T) {
 	authRepository.On("GenerateExternalToken").Return(testExternalToken, nil)
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetExternalUserByToken").Return(testExternalUser, nil)
-	userRepository.On("GetByExternalID").Return(testUser, nil)
 	authUseCases := MakeAuthUseCases(authRepository, userRepository)
 
 	token, err := authUseCases.Login("test_code")

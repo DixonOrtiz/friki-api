@@ -1,8 +1,7 @@
 package consts
 
 const (
-	SUPER_ADMIN = 1
-	ADMIN       = 2
-	STAFF       = 3
-	USER        = 4
+	ADMIN = 1
+	STORE = 2
+	BUYER = 3
 )
