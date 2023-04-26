@@ -54,29 +54,11 @@ func TestLoginWithErrorGettingExternalUserByToken(t *testing.T) {
 	assert.EqualError(t, err, fmt.Sprintf("internal: %s", testError))
 }
 
-func TestLoginWithErrorGettingUserByExternalID(t *testing.T) {
-	testError := "there was an error obtaining user by external id"
-	authRepository := new(authrepo.MockAuthRepository)
-	authRepository.On("GenerateExternalToken").Return(testExternalToken, nil)
-	userRepository := new(userrepo.MockUserRepository)
-	userRepository.On("GetExternalUserByToken").Return(testExternalUser, nil)
-	userRepository.On("GetByExternalID").Return(entities.User{}, errors.New(testError))
-
-	authUseCases := MakeAuthUseCases(authRepository, userRepository)
-
-	token, err := authUseCases.Login("test_code")
-
-	assert.Empty(t, token)
-	assert.EqualError(t, err, fmt.Sprintf("internal: %s", testError))
-}
-
 func TestLoginWithNewUserRegistration(t *testing.T) {
 	authRepository := new(authrepo.MockAuthRepository)
 	authRepository.On("GenerateExternalToken").Return(testExternalToken, nil)
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetExternalUserByToken").Return(testExternalUser, nil)
-	userRepository.On("GetByExternalID").Return(entities.User{}, nil)
-	userRepository.On("Register").Return(nil)
 	authUseCases := MakeAuthUseCases(authRepository, userRepository)
 
 	tokenStr, err := authUseCases.Login("test_code")
@@ -87,30 +69,13 @@ func TestLoginWithNewUserRegistration(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func TestLoginWithErrorInNewUserRegistration(t *testing.T) {
-	testError := "there was an error in user registration"
-	authRepository := new(authrepo.MockAuthRepository)
-	authRepository.On("GenerateExternalToken").Return(testExternalToken, nil)
-	userRepository := new(userrepo.MockUserRepository)
-	userRepository.On("GetExternalUserByToken").Return(testExternalUser, nil)
-	userRepository.On("GetByExternalID").Return(entities.User{}, nil)
-	userRepository.On("Register").Return(errors.New(testError))
-	authUseCases := MakeAuthUseCases(authRepository, userRepository)
-
-	token, err := authUseCases.Login("test_code")
-
-	assert.Empty(t, token)
-	assert.EqualError(t, err, fmt.Sprintf("internal: %s", testError))
-}
-
 func TestLoginWithErrorInJWTGeneration(t *testing.T) {
 	testError := "there was an error in jwt generation"
 	authRepository := new(authrepo.MockAuthRepository)
 	authRepository.On("GenerateExternalToken").Return(testExternalToken, nil)
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetExternalUserByToken").Return(testExternalUser, nil)
-	userRepository.On("GetByExternalID").Return(entities.User{}, nil)
-	userRepository.On("Register").Return(nil)
+
 	authUseCases := MakeAuthUseCases(authRepository, userRepository)
 	patchGenerateJWT(testError)
 

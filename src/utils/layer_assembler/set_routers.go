@@ -17,8 +17,10 @@ func (a *LayerAssembler) useMiddlewares() {
 }
 
 func (a *LayerAssembler) setAuthRouter() {
-	a.infraestructure.Router.GET("/login", a.controllers.Auth.GoogleLogin)
-	a.infraestructure.Router.GET("/callback", a.controllers.Auth.GoogleCallback)
+	auth := a.infraestructure.Router.Group("/auth")
+	auth.GET("/login", a.controllers.Auth.GoogleLogin)
+	auth.GET("/callback", a.controllers.Auth.GoogleCallback)
+
 }
 
 func (a *LayerAssembler) setUsersRouter() {
