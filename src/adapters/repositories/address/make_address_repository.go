@@ -4,7 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func MakeAddressRepository(DB *gorm.DB) AddressRepository {
+func MakeAddressRepository(DB *gorm.DB) AddressRepositoryInterface {
 	return AddressRepository{
 		DB: DB,
 	}

@@ -24,12 +24,11 @@ func (sc StoreControllers) Create(c *gin.Context) {
 
 	storeID, err := sc.StoreUseCases.Create(cutils.CreateInput{
 		Store: entities.Store{
-			ExternalID: body.ExternalID,
-			Name:       body.Name,
-			Desription: body.Description,
+			ExternalID:  body.ExternalID,
+			Name:        body.Name,
+			Description: body.Description,
 		},
 		Address: entities.Address{
-			Name:           body.Address.Name,
 			Region:         body.Address.Region,
 			City:           body.Address.City,
 			Commune:        body.Address.Commune,
