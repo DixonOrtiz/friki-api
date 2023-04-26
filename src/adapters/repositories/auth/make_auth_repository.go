@@ -5,7 +5,7 @@ import (
 )
 
 func MakeAuthRepository(config authinfra.OAuth2ConfigInterface) AuthRepositoryInterface {
-	return &AuthRepository{
+	return AuthRepository{
 		Config: config,
 	}
 }

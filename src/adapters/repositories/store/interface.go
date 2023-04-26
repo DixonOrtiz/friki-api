@@ -1,7 +1,7 @@
-package userports
+package storerepo
 
 import "frikiapi/src/entities"
 
-type StoreRepository interface {
+type StoreRepositoryInterface interface {
 	Create(store entities.Store, addressID int) (int, error)
 }

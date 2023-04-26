@@ -2,8 +2,11 @@ package storehttp
 
 import (
 	"frikiapi/src/adapters/http/controllers/store/types"
+	"frikiapi/src/entities"
 	httpinfra "frikiapi/src/infraestructure/http"
+	cutils "frikiapi/src/use_cases/store/utils/create"
 	"frikiapi/src/utils"
+	"frikiapi/src/utils/errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -19,4 +22,32 @@ func (sc StoreControllers) Create(c *gin.Context) {
 		return
 	}
 
+	storeID, err := sc.StoreUseCases.Create(cutils.CreateInput{
+		Store: entities.Store{
+			ExternalID: body.ExternalID,
+			Name:       body.Name,
+			Desription: body.Description,
+		},
+		Address: entities.Address{
+			Name:           body.Address.Name,
+			Region:         body.Address.Region,
+			City:           body.Address.City,
+			Commune:        body.Address.Commune,
+			Street:         body.Address.Street,
+			Number:         body.Address.Number,
+			AdditionalInfo: body.Address.AdditionalInfo,
+		},
+	})
+	if err != nil {
+		c.JSON(errors.GetStatusByErr(err), httpinfra.Response{
+			Error: err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusCreated, httpinfra.Response{
+		Data: map[string]int{
+			"store_id": storeID,
+		},
+	})
 }

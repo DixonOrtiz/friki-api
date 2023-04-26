@@ -1,10 +1,10 @@
 package types
 
 type CreateStoreDTO struct {
-	Name             string     `json:"name" binding:"required"`
-	Description      string     `json:"description" binding:"required"`
-	Address          AddressDTO `json:"address"`
-	WarehouseAddress AddressDTO `json:"warehouse_address"`
+	ExternalID  string     `json:"external_id" binding:"required"`
+	Name        string     `json:"name" binding:"required"`
+	Description string     `json:"description" binding:"required"`
+	Address     AddressDTO `json:"address"`
 }
 
 type AddressDTO struct {
