@@ -9,10 +9,12 @@ func (a *LayerAssembler) setRouters() {
 }
 
 func (a *LayerAssembler) useMiddlewares() {
-	middlewares := mid.MakeMiddlewares()
+	a.middlewares = mid.MakeMiddlewares(
+		a.useCases.Store,
+	)
 
 	a.infraestructure.ProtectedRouter = a.infraestructure.Router.Group("/")
-	a.infraestructure.ProtectedRouter.Use(middlewares.ValidateToken())
+	a.infraestructure.ProtectedRouter.Use(a.middlewares.ValidateToken())
 }
 
 func (a *LayerAssembler) setAuthRouter() {
@@ -23,5 +25,9 @@ func (a *LayerAssembler) setAuthRouter() {
 
 func (a *LayerAssembler) setStoreRouter() {
 	store := a.infraestructure.ProtectedRouter.Group("/stores")
+	protectedStore := store.Group("/:store_id")
+	protectedStore.Use(a.middlewares.AuthorizeStore())
+
 	store.POST("", a.controllers.Store.Create)
+	protectedStore.POST("/addresses", a.controllers.Store.CreateAddress)
 }

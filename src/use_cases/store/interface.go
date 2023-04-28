@@ -1,7 +1,12 @@
 package storeusecases
 
-import cutils "frikiapi/src/use_cases/store/utils/create"
+import (
+	"frikiapi/src/entities"
+)
 
 type StoreUseCasesInterface interface {
-	Create(input cutils.CreateInput) (int, error)
+	Create(store entities.Store) (int, error)
+	GetByExternalID(externalID string) (entities.Store, error)
+	DoesExist(externalID string, ID int) (bool, error)
+	CreateAddress(address entities.Address) (int, error)
 }

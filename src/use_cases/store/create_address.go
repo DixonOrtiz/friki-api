@@ -7,25 +7,23 @@ import (
 	"frikiapi/src/utils/errors"
 )
 
-func (u StoreUseCases) Create(store entities.Store) (int, error) {
-	externalID := store.ExternalID
-
-	exist, err := u.DoesExist(externalID, 0)
+func (u StoreUseCases) CreateAddress(address entities.Address) (int, error) {
+	exist, err := u.DoesExist("", address.StoreID)
 	if err != nil {
 		return 0, errors.NewError(consts.INTERNAL, err)
 	}
 
-	if exist {
+	if !exist {
 		return 0, errors.NewError(consts.UNPROCESSABLE, fmt.Sprintf(
-			"external id %s is already in use",
-			externalID,
+			"store with id %d does not exist",
+			address.StoreID,
 		))
 	}
 
-	storeID, err := u.StoreRepository.Create(store)
+	addressID, err := u.AddressRepository.Create(address)
 	if err != nil {
 		return 0, errors.NewError(consts.INTERNAL, err)
 	}
 
-	return storeID, nil
+	return addressID, nil
 }
