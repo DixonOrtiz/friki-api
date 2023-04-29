@@ -5,6 +5,7 @@ import (
 	httputils "frikiapi/src/adapters/http/utils"
 	httpinfra "frikiapi/src/infraestructure/http"
 	"frikiapi/src/utils/consts"
+	"frikiapi/src/utils/errors"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -22,20 +23,18 @@ func (m Middlewares) AuthorizeStore() gin.HandlerFunc {
 			return
 		}
 
-		store, err := m.StoreUseCases.GetByExternalID(externalID.(string))
+		err = m.StoreUseCases.Authorize(
+			externalID.(string),
+			storeID.(int),
+		)
 		if err != nil {
-			c.AbortWithStatusJSON(http.StatusBadRequest, httpinfra.Response{
-				Error: fmt.Sprintf("%s: %e", consts.INTERNAL, err),
-			})
+			c.AbortWithStatusJSON(
+				errors.GetStatusByErr(err),
+				httpinfra.Response{
+					Error: err.Error(),
+				},
+			)
 			return
-		}
-
-		if store.ID != storeID {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, httpinfra.Response{
-				Error: fmt.Sprintf("%s: %s", consts.UNAUTHORIZED, "only own stores can be modified"),
-			})
-			return
-
 		}
 
 		c.Next()

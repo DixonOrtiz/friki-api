@@ -17,7 +17,7 @@ func (u StoreUseCases) Create(store entities.Store) (int, error) {
 
 	if exist {
 		return 0, errors.NewError(consts.UNPROCESSABLE, fmt.Sprintf(
-			"external id %s is already in use",
+			"external id %s is related to another store",
 			externalID,
 		))
 	}
