@@ -29,5 +29,6 @@ func (a *LayerAssembler) setStoreRouter() {
 
 	protectedStore := store.Group("/:store_id")
 	protectedStore.Use(a.middlewares.AuthorizeStore())
+	protectedStore.PUT("", a.controllers.Store.Update)
 	protectedStore.POST("/addresses", a.controllers.Store.CreateAddress)
 }

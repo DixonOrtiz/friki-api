@@ -1,7 +1,9 @@
 package authhttp
 
-import authusecases "frikiapi/src/use_cases/auth"
+import (
+	contports "frikiapi/src/adapters/ports/http/controllers"
+)
 
 type AuthControllers struct {
-	AuthUseCases authusecases.AuthUseCasesInterface
+	AuthUseCases contports.AuthUseCases
 }

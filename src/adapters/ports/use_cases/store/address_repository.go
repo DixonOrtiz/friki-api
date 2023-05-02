@@ -1,4 +1,4 @@
-package userports
+package storeports
 
 import "frikiapi/src/entities"
 

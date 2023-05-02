@@ -23,6 +23,8 @@ func (m Middlewares) AuthorizeStore() gin.HandlerFunc {
 			return
 		}
 
+		c.Set("store_id", storeID)
+
 		err = m.StoreUseCases.Authorize(
 			externalID.(string),
 			storeID.(int),
