@@ -6,5 +6,5 @@ import (
 
 type AuthUseCases struct {
 	AuthRepository authports.AuthRepository
-	UserRepository authports.UserRepository
+	UserUseCases   authports.UserUseCases
 }

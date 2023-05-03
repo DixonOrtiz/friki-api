@@ -1,10 +1,13 @@
 package authhttp
 
-import authusecases "frikiapi/src/use_cases/auth"
+import (
+	ports "frikiapi/src/adapters/ports/http/controllers/auth"
+)
 
-func MakeAuthControllers(authUseCases authusecases.AuthUseCasesInterface) AuthControllers {
+func MakeAuthControllers(
+	authUseCases ports.AuthUseCases,
+) AuthControllers {
 	return AuthControllers{
 		AuthUseCases: authUseCases,
 	}
-
 }

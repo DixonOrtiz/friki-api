@@ -2,7 +2,7 @@ package userrepo
 
 import (
 	"encoding/json"
-	"frikiapi/src/adapters/repositories/auth/types"
+	"frikiapi/src/adapters/repositories/user/types"
 	"frikiapi/src/entities"
 	"io"
 	"net/http"

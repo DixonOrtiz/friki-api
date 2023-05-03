@@ -6,10 +6,10 @@ import (
 
 func MakeAuthUseCases(
 	authRepository authports.AuthRepository,
-	userRepository authports.UserRepository,
+	userUseCases authports.UserUseCases,
 ) AuthUseCasesInterface {
 	return &AuthUseCases{
 		AuthRepository: authRepository,
-		UserRepository: userRepository,
+		UserUseCases:   userUseCases,
 	}
 }

@@ -15,14 +15,14 @@ func (u StoreUseCases) DoesExist(externalID string, ID int) (bool, error) {
 	if externalID != "" {
 		store, err = u.StoreRepository.GetByExternalID(externalID)
 		if err != nil {
-			return false, errors.NewError(consts.INTERNAL, err)
+			return false, errors.New(consts.INTERNAL, err)
 		}
 	}
 
 	if ID != 0 {
 		store, err = u.StoreRepository.GetByID(ID)
 		if err != nil {
-			return false, errors.NewError(consts.INTERNAL, err)
+			return false, errors.New(consts.INTERNAL, err)
 		}
 	}
 

@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func NewError(code string, err interface{}) error {
+func New(code string, err interface{}) error {
 	message := ""
 
 	switch e := err.(type) {

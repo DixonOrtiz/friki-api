@@ -17,7 +17,7 @@ func (sc StoreControllers) CreateAddress(c *gin.Context) {
 	storeID, err := httputils.GetParam(c, "store_id", "int")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
-			Error: errors.NewError(consts.BAD_REQUEST, err),
+			Error: errors.New(consts.BAD_REQUEST, err),
 		})
 		return
 	}

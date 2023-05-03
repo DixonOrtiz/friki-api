@@ -6,21 +6,26 @@ import (
 	jwtauth "frikiapi/src/utils/jwt"
 )
 
-func (u AuthUseCases) Login(code string) (string, error) {
-	tokenStr, err := u.AuthRepository.GenerateExternalToken(code)
+func (u AuthUseCases) Login(code string) (string, bool, error) {
+	externalToken, err := u.AuthRepository.GenerateExternalToken(code)
 	if err != nil {
-		return "", errors.NewError(consts.INTERNAL, err)
+		return "", false, errors.New(consts.INTERNAL, err)
 	}
 
-	externalUser, err := u.UserRepository.GetExternalUserByToken(tokenStr)
+	externalUser, err := u.UserUseCases.GetExternalUserByToken(externalToken)
 	if err != nil {
-		return "", errors.NewError(consts.INTERNAL, err)
+		return "", false, err
+	}
+
+	created, err := u.UserUseCases.Create(externalUser)
+	if err != nil {
+		return "", false, errors.New(consts.INTERNAL, err)
 	}
 
 	token, err := jwtauth.GenerateJWT(externalUser.ExternalID)
 	if err != nil {
-		return "", errors.NewError(consts.INTERNAL, err)
+		return "", false, errors.New(consts.INTERNAL, err)
 	}
 
-	return token, nil
+	return token, created, nil
 }

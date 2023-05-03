@@ -9,13 +9,14 @@ import (
 )
 
 type CallbackResponseData struct {
-	Token string `json:"token"`
+	Token   string `json:"token"`
+	Created bool   `json:"created"`
 }
 
 func (co *AuthControllers) GoogleCallback(c *gin.Context) {
 	code := c.Query("code")
 
-	token, err := co.AuthUseCases.Login(code)
+	token, created, err := co.AuthUseCases.Login(code)
 	if err != nil {
 		c.JSON(errors.GetStatusByErr(err), httpinfra.Response{
 			Error: err.Error(),
@@ -25,7 +26,8 @@ func (co *AuthControllers) GoogleCallback(c *gin.Context) {
 
 	c.JSON(http.StatusOK, httpinfra.Response{
 		Data: CallbackResponseData{
-			Token: token,
+			Token:   token,
+			Created: created,
 		},
 	})
 }
