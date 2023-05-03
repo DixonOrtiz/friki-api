@@ -1,16 +1,16 @@
-package authrepo
+package oauthrepo
 
 import (
-	authinfra "frikiapi/src/infraestructure/auth"
+	oauthinfra "frikiapi/src/infraestructure/oauth"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func TestGenerateLoginURL(t *testing.T) {
-	config := new(authinfra.MockAuthConfig)
+	config := new(oauthinfra.MockOAuthConfig)
 	config.On("AuthCodeURL").Return(testLoginURL)
-	authRepository := MakeAuthRepository(config)
+	authRepository := MakeOAuthRepository(config)
 
 	URL := authRepository.GenerateLoginURL()
 

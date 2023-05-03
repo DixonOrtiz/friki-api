@@ -1,6 +1,6 @@
-package authrepo
+package oauthrepo
 
-type AuthRepositoryInterface interface {
+type OAuthRepositoryInterface interface {
 	GenerateExternalToken(code string) (string, error)
 	GenerateLoginURL() string
 }

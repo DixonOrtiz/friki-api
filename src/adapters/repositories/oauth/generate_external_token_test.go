@@ -1,8 +1,8 @@
-package authrepo
+package oauthrepo
 
 import (
 	"errors"
-	authinfra "frikiapi/src/infraestructure/auth"
+	oauthinfra "frikiapi/src/infraestructure/oauth"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -10,9 +10,9 @@ import (
 
 func TestGenerateExternalToken(t *testing.T) {
 	testToken := getTestToken()
-	config := new(authinfra.MockAuthConfig)
+	config := new(oauthinfra.MockOAuthConfig)
 	config.On("Exchange").Return(testToken, nil)
-	authRepository := MakeAuthRepository(config)
+	authRepository := MakeOAuthRepository(config)
 
 	token, err := authRepository.GenerateExternalToken("test_code")
 
@@ -22,9 +22,9 @@ func TestGenerateExternalToken(t *testing.T) {
 
 func TestGenerateExternalTokenWithError(t *testing.T) {
 	testError := "there was an error exchanging google user code"
-	config := new(authinfra.MockAuthConfig)
+	config := new(oauthinfra.MockOAuthConfig)
 	config.On("Exchange").Return(emptyToken, errors.New(testError))
-	authRepository := MakeAuthRepository(config)
+	authRepository := MakeOAuthRepository(config)
 
 	token, err := authRepository.GenerateExternalToken("test_code")
 

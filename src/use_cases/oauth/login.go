@@ -6,8 +6,8 @@ import (
 	jwtauth "frikiapi/src/utils/jwt"
 )
 
-func (u AuthUseCases) Login(code string) (string, bool, error) {
-	externalToken, err := u.AuthRepository.GenerateExternalToken(code)
+func (u OAuthUseCases) Login(code string) (string, bool, error) {
+	externalToken, err := u.OAuthRepository.GenerateExternalToken(code)
 	if err != nil {
 		return "", false, errors.New(consts.INTERNAL, err)
 	}

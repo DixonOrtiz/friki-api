@@ -1,4 +1,4 @@
-package authinfra
+package oauthinfra
 
 import (
 	"golang.org/x/oauth2"

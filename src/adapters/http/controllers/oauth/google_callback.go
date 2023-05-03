@@ -1,4 +1,4 @@
-package authhttp
+package oauthhttp
 
 import (
 	httpinfra "frikiapi/src/infraestructure/http"
@@ -13,10 +13,10 @@ type CallbackResponseData struct {
 	Created bool   `json:"created"`
 }
 
-func (co *AuthControllers) GoogleCallback(c *gin.Context) {
+func (co *OAuthControllers) GoogleCallback(c *gin.Context) {
 	code := c.Query("code")
 
-	token, created, err := co.AuthUseCases.Login(code)
+	token, created, err := co.OAuthUseCases.Login(code)
 	if err != nil {
 		c.JSON(errors.GetStatusByErr(err), httpinfra.Response{
 			Error: err.Error(),

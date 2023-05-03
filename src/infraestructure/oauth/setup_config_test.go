@@ -1,4 +1,4 @@
-package authinfra
+package oauthinfra
 
 import (
 	"os"

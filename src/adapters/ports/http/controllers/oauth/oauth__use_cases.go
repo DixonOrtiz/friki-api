@@ -1,6 +1,6 @@
 package contports
 
-type AuthUseCases interface {
+type OAuthUseCases interface {
 	GenerateLoginURL() string
 	Login(code string) (string, bool, error)
 }

@@ -1,4 +1,4 @@
-package authrepo
+package oauthrepo
 
 import "golang.org/x/oauth2"
 
