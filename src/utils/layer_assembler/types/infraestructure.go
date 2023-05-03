@@ -1,7 +1,7 @@
 package types
 
 import (
-	authinfra "frikiapi/src/infraestructure/auth"
+	oauthinfra "frikiapi/src/infraestructure/oauth"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -10,6 +10,6 @@ import (
 type Infraestructure struct {
 	Router          *gin.Engine
 	ProtectedRouter *gin.RouterGroup
-	AuthConfig      authinfra.OAuth2ConfigInterface
+	OAuthConfig     oauthinfra.OAuth2ConfigInterface
 	DB              *gorm.DB
 }

@@ -1,7 +1,7 @@
 package assembler
 
 import (
-	authinfra "frikiapi/src/infraestructure/auth"
+	oauthinfra "frikiapi/src/infraestructure/oauth"
 	"frikiapi/src/utils/layer_assembler/types"
 
 	"github.com/gin-gonic/gin"
@@ -9,15 +9,15 @@ import (
 )
 
 func MakeLayerAssembler(
-	authConfig authinfra.OAuth2ConfigInterface,
+	oAuthConfig oauthinfra.OAuth2ConfigInterface,
 	DB *gorm.DB,
 	router *gin.Engine,
 ) LayerAssembler {
 	return LayerAssembler{
 		infraestructure: types.Infraestructure{
-			AuthConfig: authConfig,
-			DB:         DB,
-			Router:     router,
+			OAuthConfig: oAuthConfig,
+			DB:          DB,
+			Router:      router,
 		},
 	}
 }

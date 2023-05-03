@@ -2,21 +2,21 @@ package assembler
 
 import (
 	addressrepo "frikiapi/src/adapters/repositories/address"
-	authrepo "frikiapi/src/adapters/repositories/auth"
+	oauthrepo "frikiapi/src/adapters/repositories/oauth"
 	storerepo "frikiapi/src/adapters/repositories/store"
 	userrepo "frikiapi/src/adapters/repositories/user"
 )
 
 func (a *LayerAssembler) setRepositories() {
 	a.setUserRepository()
-	a.setAuthRepository()
+	a.setOAuthRepository()
 	a.setAddressRepository()
 	a.setStoreRepository()
 }
 
-func (a *LayerAssembler) setAuthRepository() {
-	a.repositories.Auth = authrepo.MakeAuthRepository(
-		a.infraestructure.AuthConfig,
+func (a *LayerAssembler) setOAuthRepository() {
+	a.repositories.OAuth = oauthrepo.MakeOAuthRepository(
+		a.infraestructure.OAuthConfig,
 	)
 }
 

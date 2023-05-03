@@ -2,13 +2,13 @@ package types
 
 import (
 	addressrepo "frikiapi/src/adapters/repositories/address"
-	authrepo "frikiapi/src/adapters/repositories/auth"
+	oauthrepo "frikiapi/src/adapters/repositories/oauth"
 	storerepo "frikiapi/src/adapters/repositories/store"
 	userrepo "frikiapi/src/adapters/repositories/user"
 )
 
 type Repositories struct {
-	Auth    authrepo.AuthRepositoryInterface
+	OAuth   oauthrepo.OAuthRepositoryInterface
 	User    userrepo.UserRepositoryInterface
 	Address addressrepo.AddressRepositoryInterface
 	Store   storerepo.StoreRepositoryInterface

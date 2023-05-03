@@ -1,7 +1,7 @@
 package assembler
 
 import (
-	authhttp "frikiapi/src/adapters/http/controllers/auth"
+	oauthhttp "frikiapi/src/adapters/http/controllers/oauth"
 	storehttp "frikiapi/src/adapters/http/controllers/store"
 )
 
@@ -12,8 +12,8 @@ func (a *LayerAssembler) setControllers() {
 }
 
 func (a *LayerAssembler) setAuthControllers() {
-	a.controllers.Auth = authhttp.MakeAuthControllers(
-		a.useCases.Auth,
+	a.controllers.OAuth = oauthhttp.MakeOAuthControllers(
+		a.useCases.OAuth,
 	)
 }
 

@@ -1,7 +1,7 @@
 package assembler
 
 import (
-	authusecases "frikiapi/src/use_cases/auth"
+	oauthusecases "frikiapi/src/use_cases/oauth"
 	storeusecases "frikiapi/src/use_cases/store"
 	userusecases "frikiapi/src/use_cases/user"
 )
@@ -19,8 +19,8 @@ func (a *LayerAssembler) setUserUseCases() {
 }
 
 func (a *LayerAssembler) setAuthUseCases() {
-	a.useCases.Auth = authusecases.MakeAuthUseCases(
-		a.repositories.Auth,
+	a.useCases.OAuth = oauthusecases.MakeOAuthUseCases(
+		a.repositories.OAuth,
 		a.useCases.User,
 	)
 }

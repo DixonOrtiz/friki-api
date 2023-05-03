@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	authinfra "frikiapi/src/infraestructure/auth"
 	gormdb "frikiapi/src/infraestructure/db/gorm"
+	oauthinfra "frikiapi/src/infraestructure/oauth"
 	assembler "frikiapi/src/utils/layer_assembler"
 
 	"github.com/gin-gonic/gin"
@@ -21,7 +21,7 @@ func main() {
 	}
 
 	layerAssembler := assembler.MakeLayerAssembler(
-		authinfra.SetupConfig(),
+		oauthinfra.SetupConfig(),
 		DB,
 		gin.Default(),
 	)
