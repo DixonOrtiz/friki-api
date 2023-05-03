@@ -1,4 +1,4 @@
-package authports
+package oauthports
 
 import "frikiapi/src/entities"
 

@@ -1,4 +1,4 @@
-package contports
+package oauthports
 
 type OAuthUseCases interface {
 	GenerateLoginURL() string

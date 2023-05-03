@@ -1,7 +1,7 @@
-package storehttp
+package userhttp
 
 import (
-	"frikiapi/src/adapters/http/controllers/store/types"
+	"frikiapi/src/adapters/http/controllers/user/types"
 	httputils "frikiapi/src/adapters/http/utils"
 	"frikiapi/src/entities"
 	httpinfra "frikiapi/src/infraestructure/http"
@@ -13,16 +13,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (sc StoreControllers) CreateAddress(c *gin.Context) {
-	storeID, err := httputils.GetParam(c, "store_id")
+func (co UserControllers) Update(c *gin.Context) {
+	var body types.UpdateUserDTO
+
+	userID, err := httputils.GetParam(c, "user_id")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
 			Error: errors.New(consts.BAD_REQUEST, err),
 		})
 		return
 	}
-
-	var body types.CreateAddressDTO
 
 	if err := c.ShouldBindJSON(&body); err != nil {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
@@ -31,14 +31,12 @@ func (sc StoreControllers) CreateAddress(c *gin.Context) {
 		return
 	}
 
-	addressID, err := sc.StoreUseCases.CreateAddress(entities.Address{
-		StoreID:        storeID,
-		Region:         body.Region,
-		City:           body.City,
-		Commune:        body.Commune,
-		Street:         body.Street,
-		Number:         body.Number,
-		AdditionalInfo: body.AdditionalInfo,
+	err = co.UserUseCases.Update(entities.User{
+		ID:       userID,
+		Name:     body.Name,
+		LastName: body.LastName,
+		Email:    body.Email,
+		Picture:  body.Picture,
 	})
 	if err != nil {
 		c.JSON(errors.GetStatusByErr(err), httpinfra.Response{
@@ -47,9 +45,9 @@ func (sc StoreControllers) CreateAddress(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, httpinfra.Response{
+	c.JSON(http.StatusOK, httpinfra.Response{
 		Data: map[string]int{
-			"address_id": addressID,
+			"user_id": userID,
 		},
 	})
 }

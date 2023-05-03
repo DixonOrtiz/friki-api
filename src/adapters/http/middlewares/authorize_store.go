@@ -15,7 +15,7 @@ func (m Middlewares) AuthorizeStore() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		externalID, _ := c.Get("external_id")
 
-		storeID, err := httputils.GetParam(c, "store_id", "int")
+		storeID, err := httputils.GetParam(c, "store_id")
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusBadRequest, httpinfra.Response{
 				Error: fmt.Sprintf("%s: %e", consts.BAD_REQUEST, err),
@@ -27,7 +27,7 @@ func (m Middlewares) AuthorizeStore() gin.HandlerFunc {
 
 		err = m.StoreUseCases.Authorize(
 			externalID.(string),
-			storeID.(int),
+			storeID,
 		)
 		if err != nil {
 			c.AbortWithStatusJSON(

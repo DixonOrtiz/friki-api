@@ -5,6 +5,7 @@ import mid "frikiapi/src/adapters/http/middlewares"
 func (a *LayerAssembler) setRouters() {
 	a.useMiddlewares()
 	a.setOAuthRouter()
+	a.setUserRouter()
 	a.setStoreRouter()
 }
 
@@ -21,6 +22,11 @@ func (a *LayerAssembler) setOAuthRouter() {
 	auth := a.infraestructure.Router.Group("/oauth")
 	auth.GET("/login", a.controllers.OAuth.GoogleLogin)
 	auth.GET("/callback", a.controllers.OAuth.GoogleCallback)
+}
+
+func (a *LayerAssembler) setUserRouter() {
+	users := a.infraestructure.ProtectedRouter.Group("/users")
+	users.PUT(":user_id", a.controllers.User.Update)
 }
 
 func (a *LayerAssembler) setStoreRouter() {
