@@ -1,8 +1,8 @@
 package main
 
 import (
+	"fmt"
 	"log"
-	"os"
 
 	"frikiapi/src/infraestructure/assembler"
 	"frikiapi/src/infraestructure/firestore"
@@ -18,7 +18,7 @@ func main() {
 
 	_, err := firestore.CreateConnection()
 	if err != nil {
-		log.Fatal("could not connect to firestore database")
+		log.Fatal(fmt.Sprintf("could not connect to firestore database. %e", err))
 	}
 
 	assembler := assembler.MakeAssembler(
@@ -26,5 +26,7 @@ func main() {
 		gin.Default(),
 	)
 	router := assembler.GetRouterConfigured()
-	router.Run(os.Getenv("PORT"))
+
+
+	router.Run()
 }

@@ -12,7 +12,7 @@ func (u OAuthUseCases) Login(code string) (string, bool, error) {
 		return "", false, errors.New(consts.INTERNAL, err)
 	}
 
-	externalUser, err := u.UserUseCases.GetExternalUserByToken(externalToken)
+	externalUser, err := u.ExternalUserRepository.GetByToken(externalToken)
 	if err != nil {
 		return "", false, err
 	}

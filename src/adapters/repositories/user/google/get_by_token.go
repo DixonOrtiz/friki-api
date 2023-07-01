@@ -1,4 +1,4 @@
-package userrepo
+package googleuserrepo
 
 import (
 	"encoding/json"
@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func (r *UserRepository) GetExternalUserByToken(token string) (entities.User, error) {
+func (r *GoogleUserRepository) GetByToken(token string) (entities.User, error) {
 	emptyUser := entities.User{}
 	usersURL := "https://www.googleapis.com/oauth2/v2/userinfo?access_token="
 

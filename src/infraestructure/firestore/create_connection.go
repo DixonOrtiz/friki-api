@@ -8,7 +8,7 @@ import (
 )
 
 func CreateConnection() (*gofirestore.Client, error) {
-	client, err := gofirestore.NewClient(context.Background(), os.Getenv("PORT"))
+	client, err := gofirestore.NewClient(context.Background(), os.Getenv("PROJECT_ID"))
 	if err != nil {
 		return nil, err
 	}

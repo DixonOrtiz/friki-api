@@ -20,6 +20,7 @@ func (a *Assembler) setUserUseCases() {
 func (a *Assembler) setAuthUseCases() {
 	a.useCases.OAuth = oauthusecases.MakeOAuthUseCases(
 		a.repositories.OAuth,
+		a.repositories.ExternalUser,
 		a.useCases.User,
 	)
 }
