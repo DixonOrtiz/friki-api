@@ -10,5 +10,4 @@ type IStoreUseCases interface {
 	Update(store entities.Store) error
 	GetByExternalID(externalID string) (entities.Store, error)
 	DoesExist(externalID string, ID int) (bool, error)
-	CreateAddress(address entities.Address) (int, error)
 }

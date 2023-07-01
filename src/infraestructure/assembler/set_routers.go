@@ -33,5 +33,4 @@ func (a *Assembler) setStoreRouter() {
 
 	protectedStore := store.Group("/:store_id")
 	protectedStore.PUT("", a.controllers.Store.Update)
-	protectedStore.POST("/addresses", a.controllers.Store.CreateAddress)
 }

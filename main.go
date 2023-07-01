@@ -5,7 +5,8 @@ import (
 	"os"
 
 	"frikiapi/src/infraestructure/assembler"
-	gormdb "frikiapi/src/infraestructure/db/gorm"
+	"frikiapi/src/infraestructure/firestore"
+
 	oauthinfra "frikiapi/src/infraestructure/oauth"
 
 	"github.com/gin-gonic/gin"
@@ -15,14 +16,13 @@ import (
 func main() {
 	godotenv.Load()
 
-	DB, err := gormdb.CreateConnection()
+	_, err := firestore.CreateConnection()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("could not connect to firestore database")
 	}
 
 	assembler := assembler.MakeAssembler(
 		oauthinfra.SetupConfig(),
-		DB,
 		gin.Default(),
 	)
 	router := assembler.GetRouterConfigured()
