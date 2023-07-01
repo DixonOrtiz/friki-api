@@ -7,32 +7,32 @@ import (
 	userrepo "frikiapi/src/adapters/repositories/user"
 )
 
-func (a *LayerAssembler) setRepositories() {
+func (a *Assembler) setRepositories() {
 	a.setUserRepository()
 	a.setOAuthRepository()
 	a.setAddressRepository()
 	a.setStoreRepository()
 }
 
-func (a *LayerAssembler) setOAuthRepository() {
+func (a *Assembler) setOAuthRepository() {
 	a.repositories.OAuth = oauthrepo.MakeOAuthRepository(
 		a.infraestructure.OAuthConfig,
 	)
 }
 
-func (a *LayerAssembler) setUserRepository() {
+func (a *Assembler) setUserRepository() {
 	a.repositories.User = userrepo.MakeUserRepository(
 		a.infraestructure.DB,
 	)
 }
 
-func (a *LayerAssembler) setAddressRepository() {
+func (a *Assembler) setAddressRepository() {
 	a.repositories.Address = addressrepo.MakeAddressRepository(
 		a.infraestructure.DB,
 	)
 }
 
-func (a *LayerAssembler) setStoreRepository() {
+func (a *Assembler) setStoreRepository() {
 	a.repositories.Store = storerepo.MakeStoreRepository(
 		a.infraestructure.DB,
 	)

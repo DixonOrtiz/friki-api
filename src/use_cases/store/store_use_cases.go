@@ -1,8 +1,11 @@
 package storeusecases
 
-import storeports "frikiapi/src/adapters/ports/use_cases/store"
+import (
+	addressepository "frikiapi/src/adapters/repositories/address"
+	storerepository "frikiapi/src/adapters/repositories/store"
+)
 
 type StoreUseCases struct {
-	StoreRepository   storeports.StoreRepository
-	AddressRepository storeports.AddressRepository
+	StoreRepository   storerepository.IStoreRepository
+	AddressRepository addressepository.IAddressRepository
 }

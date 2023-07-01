@@ -1,6 +1,6 @@
 package oauthrepo
 
-type OAuthRepositoryInterface interface {
+type IOAuthRepository interface {
 	GenerateExternalToken(code string) (string, error)
 	GenerateLoginURL() string
 }

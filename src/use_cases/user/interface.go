@@ -2,7 +2,7 @@ package userusecases
 
 import "frikiapi/src/entities"
 
-type UserUseCasesInterface interface {
+type IUserUseCases interface {
 	DoesExist(externalID string) (bool, error)
 	Create(user entities.User) (bool, error)
 	Update(user entities.User) error

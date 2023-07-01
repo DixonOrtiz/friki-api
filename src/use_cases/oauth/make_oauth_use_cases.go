@@ -1,13 +1,14 @@
 package authusecases
 
 import (
-	oauthports "frikiapi/src/adapters/ports/use_cases/oauth"
+	oauthrepository "frikiapi/src/adapters/repositories/oauth"
+	userusecases "frikiapi/src/use_cases/user"
 )
 
 func MakeOAuthUseCases(
-	oAuthRepository oauthports.OAuthRepository,
-	userUseCases oauthports.UserUseCases,
-) AuthUseCasesInterface {
+	oAuthRepository oauthrepository.IOAuthRepository,
+	userUseCases userusecases.IUserUseCases,
+) IOAuthUseCases {
 	return &OAuthUseCases{
 		OAuthRepository: oAuthRepository,
 		UserUseCases:    userUseCases,

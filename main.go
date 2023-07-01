@@ -4,9 +4,9 @@ import (
 	"log"
 	"os"
 
+	"frikiapi/src/infraestructure/assembler"
 	gormdb "frikiapi/src/infraestructure/db/gorm"
 	oauthinfra "frikiapi/src/infraestructure/oauth"
-	assembler "frikiapi/src/utils/layer_assembler"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -20,11 +20,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	layerAssembler := assembler.MakeLayerAssembler(
+	assembler := assembler.MakeAssembler(
 		oauthinfra.SetupConfig(),
 		DB,
 		gin.Default(),
 	)
-	router := layerAssembler.GetRouterConfigured()
+	router := assembler.GetRouterConfigured()
 	router.Run(os.Getenv("PORT"))
 }

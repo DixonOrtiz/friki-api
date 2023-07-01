@@ -8,8 +8,8 @@ import (
 )
 
 type Repositories struct {
-	OAuth   oauthrepo.OAuthRepositoryInterface
-	User    userrepo.UserRepositoryInterface
-	Address addressrepo.AddressRepositoryInterface
-	Store   storerepo.StoreRepositoryInterface
+	OAuth   oauthrepo.IOAuthRepository
+	User    userrepo.IUserRepository
+	Address addressrepo.IAddressRepository
+	Store   storerepo.IStoreRepository
 }

@@ -2,10 +2,10 @@ package assembler
 
 import (
 	mid "frikiapi/src/adapters/http/middlewares"
-	"frikiapi/src/utils/layer_assembler/types"
+	"frikiapi/src/infraestructure/assembler/types"
 )
 
-type LayerAssembler struct {
+type Assembler struct {
 	middlewares     mid.Middlewares
 	controllers     types.Controllers
 	useCases        types.UseCases

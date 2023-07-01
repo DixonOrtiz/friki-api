@@ -2,9 +2,9 @@ package storehttp
 
 import (
 	"frikiapi/src/adapters/http/controllers/store/types"
+	"frikiapi/src/adapters/http/utils"
 	"frikiapi/src/entities"
 	httpinfra "frikiapi/src/infraestructure/http"
-	"frikiapi/src/utils"
 	"frikiapi/src/utils/errors"
 	"net/http"
 

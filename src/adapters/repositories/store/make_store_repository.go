@@ -4,7 +4,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func MakeStoreRepository(DB *gorm.DB) StoreRepositoryInterface {
+func MakeStoreRepository(DB *gorm.DB) IStoreRepository {
 	return StoreRepository{
 		DB: DB,
 	}

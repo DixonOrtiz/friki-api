@@ -1,10 +1,12 @@
 package authusecases
 
 import (
-	oauthports "frikiapi/src/adapters/ports/use_cases/oauth"
+	oauthrepository "frikiapi/src/adapters/repositories/oauth"
+	userusecases "frikiapi/src/use_cases/user"
 )
 
+
 type OAuthUseCases struct {
-	OAuthRepository oauthports.OAuthRepository
-	UserUseCases    oauthports.UserUseCases
+	OAuthRepository oauthrepository.IOAuthRepository
+	UserUseCases    userusecases.IUserUseCases
 }

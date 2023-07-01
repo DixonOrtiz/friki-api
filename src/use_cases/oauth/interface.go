@@ -1,6 +1,6 @@
 package authusecases
 
-type AuthUseCasesInterface interface {
+type IOAuthUseCases interface {
 	GenerateLoginURL() string
 	Login(code string) (string, bool, error)
 }

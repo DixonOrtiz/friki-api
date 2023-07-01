@@ -4,7 +4,7 @@ import (
 	"frikiapi/src/entities"
 )
 
-type StoreUseCasesInterface interface {
+type IStoreUseCases interface {
 	Authorize(externalID string, storeID int) error
 	Create(store entities.Store) (int, error)
 	Update(store entities.Store) error

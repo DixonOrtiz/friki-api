@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (a *LayerAssembler) GetRouterConfigured() *gin.Engine {
+func (a *Assembler) GetRouterConfigured() *gin.Engine {
 	a.setRepositories()
 	a.setUseCases()
 	a.setControllers()

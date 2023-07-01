@@ -1,13 +1,11 @@
 package oauthhttp
 
 import (
-	ports "frikiapi/src/adapters/ports/http/controllers/oauth"
+	oauthusecases "frikiapi/src/use_cases/oauth"
 )
 
 func MakeOAuthControllers(
-	oAuthUseCases ports.OAuthUseCases,
+	oAuthUseCases oauthusecases.IOAuthUseCases,
 ) OAuthControllers {
-	return OAuthControllers{
-		OAuthUseCases: oAuthUseCases,
-	}
+	return OAuthControllers{OAuthUseCases: oAuthUseCases}
 }

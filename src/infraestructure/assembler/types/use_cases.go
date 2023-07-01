@@ -7,7 +7,7 @@ import (
 )
 
 type UseCases struct {
-	OAuth oauthusecases.AuthUseCasesInterface
-	Store storeusecases.StoreUseCasesInterface
-	User  userusecases.UserUseCasesInterface
+	OAuth oauthusecases.IOAuthUseCases
+	Store storeusecases.IStoreUseCases
+	User  userusecases.IUserUseCases
 }

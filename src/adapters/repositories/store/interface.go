@@ -2,7 +2,7 @@ package storerepo
 
 import "frikiapi/src/entities"
 
-type StoreRepositoryInterface interface {
+type IStoreRepository interface {
 	Create(store entities.Store) (int, error)
 	Update(store entities.Store) error
 	GetByExternalID(externalID string) (entities.Store, error)

@@ -1,10 +1,8 @@
 package userhttp
 
-import (
-	userports "frikiapi/src/adapters/ports/http/controllers/user"
-)
+import userusecases "frikiapi/src/use_cases/user"
 
-func MakeUserControllers(userUseCases userports.UserUseCases) UserControllers {
+func MakeUserControllers(userUseCases userusecases.IUserUseCases) UserControllers {
 	return UserControllers{
 		UserUseCases: userUseCases,
 	}

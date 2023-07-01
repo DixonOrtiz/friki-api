@@ -6,26 +6,26 @@ import (
 	userhttp "frikiapi/src/adapters/http/controllers/user"
 )
 
-func (a *LayerAssembler) setControllers() {
+func (a *Assembler) setControllers() {
 	a.setAuthControllers()
 	a.setUserControllers()
 	a.setStoreControllers()
 
 }
 
-func (a *LayerAssembler) setAuthControllers() {
+func (a *Assembler) setAuthControllers() {
 	a.controllers.OAuth = oauthhttp.MakeOAuthControllers(
 		a.useCases.OAuth,
 	)
 }
 
-func (a *LayerAssembler) setUserControllers() {
+func (a *Assembler) setUserControllers() {
 	a.controllers.User = userhttp.MakeUserControllers(
 		a.useCases.User,
 	)
 }
 
-func (a *LayerAssembler) setStoreControllers() {
+func (a *Assembler) setStoreControllers() {
 	a.controllers.Store = storehttp.MakeStoreControllers(
 		a.useCases.Store,
 	)

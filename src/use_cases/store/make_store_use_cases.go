@@ -1,13 +1,14 @@
 package storeusecases
 
 import (
-	storeports "frikiapi/src/adapters/ports/use_cases/store"
+	addressepository "frikiapi/src/adapters/repositories/address"
+	storerepository "frikiapi/src/adapters/repositories/store"
 )
 
 func MakeStoreUseCases(
-	storeRepository storeports.StoreRepository,
-	addressRepository storeports.AddressRepository,
-) StoreUseCasesInterface {
+	storeRepository storerepository.IStoreRepository,
+	addressRepository addressepository.IAddressRepository,
+) IStoreUseCases {
 	return &StoreUseCases{
 		StoreRepository:   storeRepository,
 		AddressRepository: addressRepository,

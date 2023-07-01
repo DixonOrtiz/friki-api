@@ -2,10 +2,9 @@ package storehttp
 
 import (
 	"frikiapi/src/adapters/http/controllers/store/types"
-	httputils "frikiapi/src/adapters/http/utils"
+	"frikiapi/src/adapters/http/utils"
 	"frikiapi/src/entities"
 	httpinfra "frikiapi/src/infraestructure/http"
-	"frikiapi/src/utils"
 	"frikiapi/src/utils/consts"
 	"frikiapi/src/utils/errors"
 	"net/http"
@@ -14,7 +13,7 @@ import (
 )
 
 func (sc StoreControllers) CreateAddress(c *gin.Context) {
-	storeID, err := httputils.GetParam(c, "store_id")
+	storeID, err := utils.GetParam(c, "store_id")
 	if err != nil {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
 			Error: errors.New(consts.BAD_REQUEST, err),

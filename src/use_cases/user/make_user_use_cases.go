@@ -1,12 +1,10 @@
 package userusecases
 
-import (
-	userports "frikiapi/src/adapters/ports/use_cases/user"
-)
+import userrepository "frikiapi/src/adapters/repositories/user"
 
 func MakeUserUseCases(
-	userRepository userports.UserRepository,
-) UserUseCasesInterface {
+	userRepository userrepository.IUserRepository,
+) IUserUseCases {
 	return &UserUseCases{
 		UserRepository: userRepository,
 	}

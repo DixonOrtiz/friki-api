@@ -1,7 +1,7 @@
 package jwtauth
 
 import (
-	"frikiapi/src/utils"
+	"frikiapi/src/utils/time"
 	"os"
 	"testing"
 
@@ -10,7 +10,7 @@ import (
 
 func TestGenerateJWT(t *testing.T) {
 	os.Setenv("JWT_KEY", testJWTKey)
-	utils.PatchTimeNow()
+	time.PatchTimeNow()
 
 	tokenStr, err := GenerateJWT(externalIDInput)
 	externalID, exp := GetClaimsFromTestToken(tokenStr)

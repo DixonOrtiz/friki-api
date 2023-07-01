@@ -1,9 +1,9 @@
 package userhttp
 
 import (
-	userports "frikiapi/src/adapters/ports/http/controllers/user"
+	userusecases "frikiapi/src/use_cases/user"
 )
 
 type UserControllers struct {
-	UserUseCases userports.UserUseCases
+	UserUseCases userusecases.IUserUseCases
 }

@@ -1,9 +1,9 @@
 package storehttp
 
 import (
-	contports "frikiapi/src/adapters/ports/http/controllers"
+	storeusecases "frikiapi/src/use_cases/store"
 )
 
 type StoreControllers struct {
-	StoreUseCases contports.StoreUseCases
+	StoreUseCases storeusecases.IStoreUseCases
 }

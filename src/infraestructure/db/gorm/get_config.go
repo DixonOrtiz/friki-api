@@ -1,7 +1,7 @@
 package gormdb
 
 import (
-	"frikiapi/src/utils"
+	"frikiapi/src/utils/types"
 	"os"
 )
 
@@ -14,7 +14,7 @@ var (
 )
 
 func GetConfig() (Config, error) {
-	port, err := utils.ParseStringToInt(os.Getenv(DB_PORT))
+	port, err := types.ParseStringToInt(os.Getenv(DB_PORT))
 	if err != nil {
 		return Config{}, err
 	}

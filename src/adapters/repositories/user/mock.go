@@ -10,7 +10,7 @@ type MockUserRepository struct {
 	mock.Mock
 }
 
-func (m MockUserRepository) GetExternalUserByToken(token string) (entities.User, error) {
+func (m *MockUserRepository) GetExternalUserByToken(token string) (entities.User, error) {
 	args := m.Called()
 	result := args.Get(0)
 	return result.(entities.User), args.Error(1)

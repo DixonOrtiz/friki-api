@@ -5,7 +5,6 @@ import (
 	httputils "frikiapi/src/adapters/http/utils"
 	"frikiapi/src/entities"
 	httpinfra "frikiapi/src/infraestructure/http"
-	"frikiapi/src/utils"
 	"frikiapi/src/utils/consts"
 	"frikiapi/src/utils/errors"
 	"net/http"
@@ -26,7 +25,7 @@ func (co UserControllers) Update(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&body); err != nil {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
-			Error: utils.FormatInputError(err),
+			Error: httputils.FormatInputError(err),
 		})
 		return
 	}
