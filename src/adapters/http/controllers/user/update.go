@@ -15,23 +15,23 @@ import (
 func (co UserControllers) Update(c *gin.Context) {
 	var body types.UpdateUserDTO
 
-	userID, err := httputils.GetParam(c, "user_id")
-	if err != nil {
+	userID := c.Param("user_id")
+	if userID == "" {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
-			Error: errors.New(consts.BAD_REQUEST, err),
+			Error: errors.New(consts.BAD_REQUEST, errors.New(consts.BAD_REQUEST, "id is required")),
 		})
 		return
 	}
 
-	if err := c.ShouldBindJSON(&body); err != nil {
+	err := c.ShouldBindJSON(&body)
+	if err != nil {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
 			Error: httputils.FormatInputError(err),
 		})
 		return
 	}
 
-	err = co.UserUseCases.Update(entities.User{
-		ID:       userID,
+	err = co.UserUseCases.Update(userID, entities.User{
 		Name:     body.Name,
 		LastName: body.LastName,
 		Email:    body.Email,
@@ -45,7 +45,7 @@ func (co UserControllers) Update(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, httpinfra.Response{
-		Data: map[string]int{
+		Data: map[string]string{
 			"user_id": userID,
 		},
 	})

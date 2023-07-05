@@ -1,7 +1,7 @@
 package userrepo
 
-import "gorm.io/gorm"
+import "cloud.google.com/go/firestore"
 
 type UserRepository struct {
-	DB *gorm.DB
+	DB *firestore.Client
 }

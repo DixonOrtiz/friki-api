@@ -11,7 +11,7 @@ func (u UserUseCases) DoesExist(externalID string) (bool, error) {
 		return false, errors.New(consts.INTERNAL, err)
 	}
 
-	if user.ID != 0 {
+	if user.ExternalID != "" {
 		return true, nil
 	}
 

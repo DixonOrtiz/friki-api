@@ -1,12 +1,18 @@
 package userrepo
 
-import "frikiapi/src/entities"
+import (
+	"context"
+	"frikiapi/src/adapters/repositories/user/types"
+	"frikiapi/src/entities"
+)
 
-func (r *UserRepository) Create(user entities.User) (int, error) {
-	err := r.DB.Table("users").Create(&user).Error
+func (r *UserRepository) Create(user entities.User) error {
+	firestoreUser := types.MapUserToFirestore(user)
+	
+	_, err := r.DB.Collection("users").NewDoc().Create(context.Background(), firestoreUser)
 	if err != nil {
-		return 0, err
+		return err
 	}
 
-	return user.ID, nil
+	return nil
 }

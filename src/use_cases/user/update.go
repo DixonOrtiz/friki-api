@@ -6,8 +6,8 @@ import (
 	"frikiapi/src/utils/errors"
 )
 
-func (u UserUseCases) Update(user entities.User) error {
-	err := u.UserRepository.Update(user)
+func (u UserUseCases) Update(ID string, user entities.User) error {
+	err := u.UserRepository.Update(ID, user)
 	if err != nil {
 		return errors.New(consts.INTERNAL, err)
 	}

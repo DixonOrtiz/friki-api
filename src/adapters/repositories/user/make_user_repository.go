@@ -1,10 +1,8 @@
 package userrepo
 
-import (
-	"gorm.io/gorm"
-)
+import "cloud.google.com/go/firestore"
 
-func MakeUserRepository(DB *gorm.DB) IUserRepository {
+func MakeUserRepository(DB *firestore.Client) IUserRepository {
 	return &UserRepository{
 		DB: DB,
 	}

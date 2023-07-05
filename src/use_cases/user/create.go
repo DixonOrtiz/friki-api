@@ -16,7 +16,7 @@ func (u UserUseCases) Create(user entities.User) (bool, error) {
 		return false, nil
 	}
 
-	_, err = u.UserRepository.Create(user)
+	err = u.UserRepository.Create(user)
 	if err != nil {
 		return false, errors.New(consts.INTERNAL, err)
 	}

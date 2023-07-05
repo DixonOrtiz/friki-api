@@ -1,4 +1,3 @@
 package googleuserrepo
 
-type GoogleUserRepository struct {
-}
+type GoogleUserRepository struct{}

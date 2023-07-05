@@ -1,24 +1,20 @@
 package userrepo
 
 import (
-	"fmt"
+	"context"
+	"frikiapi/src/adapters/repositories/user/types"
 	"frikiapi/src/entities"
 )
 
-func (r *UserRepository) Update(user entities.User) error {
-	res := r.DB.
-		Table("users").
-		Omit("external_id").
-		Updates(user).
-		Where("id = ?", user.ID)
+func (r *UserRepository) Update(ID string, user entities.User) error {
+	firestoreUser := types.MapUserToFirestore(user)
 
-	err := res.Error
+	_, err := r.DB.Collection("users").Doc(ID).Set(
+		context.Background(),
+		firestoreUser,
+	)
 	if err != nil {
 		return err
-	}
-
-	if res.RowsAffected == 0 {
-		return fmt.Errorf("there is no user with id %d", user.ID)
 	}
 
 	return nil

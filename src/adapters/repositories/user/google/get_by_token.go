@@ -2,7 +2,7 @@ package googleuserrepo
 
 import (
 	"encoding/json"
-	"frikiapi/src/adapters/repositories/user/types"
+	"frikiapi/src/adapters/repositories/user/google/types"
 	"frikiapi/src/entities"
 	"io"
 	"net/http"
