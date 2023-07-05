@@ -2,15 +2,18 @@ package assembler
 
 import (
 	oauthrepo "frikiapi/src/adapters/repositories/oauth"
+	userrepo "frikiapi/src/adapters/repositories/user"
 	googleuserrepo "frikiapi/src/adapters/repositories/user/google"
 )
 
 func (a *Assembler) setRepositories() {
-	// a.setUserRepository()
+	a.setUserRepository()
 	a.setOAuthRepository()
 	a.setExternalUserRepository()
-	// a.setAddressRepository()
-	// a.setStoreRepository()
+}
+
+func (a *Assembler) setUserRepository() {
+	a.repositories.User = userrepo.MakeUserRepository(a.infraestructure.DB)
 }
 
 func (a *Assembler) setOAuthRepository() {
@@ -22,13 +25,3 @@ func (a *Assembler) setOAuthRepository() {
 func (a *Assembler) setExternalUserRepository() {
 	a.repositories.ExternalUser = googleuserrepo.MakeUserRepository()
 }
-
-// func (a *Assembler) setAddressRepository() {
-// 	a.repositories.Address = addressrepo.MakeAddressRepository(
-// 	)
-// }
-
-// func (a *Assembler) setStoreRepository() {
-// 	a.repositories.Store = storerepo.MakeStoreRepository(
-// 	)
-// }

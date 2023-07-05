@@ -16,7 +16,7 @@ import (
 func main() {
 	godotenv.Load()
 
-	_, err := firestore.CreateConnection()
+	DB, err := firestore.CreateConnection()
 	if err != nil {
 		log.Fatal(fmt.Sprintf("could not connect to firestore database. %e", err))
 	}
@@ -24,9 +24,9 @@ func main() {
 	assembler := assembler.MakeAssembler(
 		oauthinfra.SetupConfig(),
 		gin.Default(),
+		DB,
 	)
 	router := assembler.GetRouterConfigured()
-
 
 	router.Run()
 }
