@@ -2,7 +2,7 @@ package assembler
 
 import (
 	oauthhttp "frikiapi/src/adapters/http/controllers/oauth"
-	userhttp "frikiapi/src/adapters/http/controllers/user"
+	userhttp "frikiapi/src/adapters/http/controllers/users"
 )
 
 func (a *Assembler) setControllers() {

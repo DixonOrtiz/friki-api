@@ -2,7 +2,7 @@ package types
 
 import (
 	oauthttp "frikiapi/src/adapters/http/controllers/oauth"
-	userhttp "frikiapi/src/adapters/http/controllers/user"
+	userhttp "frikiapi/src/adapters/http/controllers/users"
 )
 
 type Controllers struct {

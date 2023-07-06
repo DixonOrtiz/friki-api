@@ -1,11 +1,14 @@
 package assembler
 
-import mid "frikiapi/src/adapters/http/middlewares"
+import (
+	userhttp "frikiapi/src/adapters/http/controllers/users"
+	mid "frikiapi/src/adapters/http/middlewares"
+)
 
-func (a *Assembler) setRouters() {
+func (a *Assembler) setRoutes() {
 	a.useMiddlewares()
-	a.setOAuthRouter()
-	a.setUserRouter()
+	a.setOAuthRoutes()
+	a.setUserRoutes()
 }
 
 func (a *Assembler) useMiddlewares() {
@@ -15,13 +18,12 @@ func (a *Assembler) useMiddlewares() {
 	a.infraestructure.ProtectedRouter.Use(a.middlewares.ValidateToken())
 }
 
-func (a *Assembler) setOAuthRouter() {
+func (a *Assembler) setOAuthRoutes() {
 	auth := a.infraestructure.Router.Group("/oauth")
 	auth.GET("/login", a.controllers.OAuth.GoogleLogin)
 	auth.GET("/callback", a.controllers.OAuth.GoogleCallback)
 }
 
-func (a *Assembler) setUserRouter() {
-	users := a.infraestructure.ProtectedRouter.Group("/users")
-	users.PUT(":user_id", a.controllers.User.Update)
+func (a *Assembler) setUserRoutes() {
+	userhttp.SetRoutes(a.infraestructure.ProtectedRouter, a.controllers.User)
 }

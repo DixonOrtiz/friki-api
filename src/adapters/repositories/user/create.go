@@ -8,7 +8,7 @@ import (
 
 func (r *UserRepository) Create(user entities.User) error {
 	firestoreUser := types.MapUserToFirestore(user)
-	
+
 	_, err := r.DB.Collection("users").NewDoc().Create(context.Background(), firestoreUser)
 	if err != nil {
 		return err

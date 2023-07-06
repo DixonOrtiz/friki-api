@@ -6,10 +6,10 @@ import (
 	"frikiapi/src/entities"
 )
 
-func (r *UserRepository) Update(ID string, user entities.User) error {
+func (r *UserRepository) Update(document string, user entities.User) error {
 	firestoreUser := types.MapUserToFirestore(user)
 
-	_, err := r.DB.Collection("users").Doc(ID).Set(
+	_, err := r.DB.Collection("users").Doc(document).Set(
 		context.Background(),
 		firestoreUser,
 	)

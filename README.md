@@ -1,6 +1,9 @@
-- Repasar login (quitar el autoregister de las cuentas tipo tienda)
-- Endpoint de creación de tienda (omitir foto de perfil de momento)
+- Repasar login (v)
+- Endpoint de creación de tienda
 - Módulo de direcciones de Chile
 - Crear producto
 - Listar productos
 - Editar productos
+
+
+go test ./...

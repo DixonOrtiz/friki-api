@@ -8,7 +8,7 @@ func (a *Assembler) GetRouterConfigured() *gin.Engine {
 	a.setRepositories()
 	a.setUseCases()
 	a.setControllers()
-	a.setRouters()
+	a.setRoutes()
 
 	return a.infraestructure.Router
 }

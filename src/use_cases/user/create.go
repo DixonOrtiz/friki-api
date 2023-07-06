@@ -7,7 +7,7 @@ import (
 )
 
 func (u UserUseCases) Create(user entities.User) (bool, error) {
-	exists, err := u.DoesExist(user.ExternalID)
+	exists, _, err := u.DoesExist(user.ExternalID)
 	if err != nil {
 		return false, errors.New(consts.INTERNAL, err)
 	}

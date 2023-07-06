@@ -5,15 +5,15 @@ import (
 	"frikiapi/src/utils/errors"
 )
 
-func (u UserUseCases) DoesExist(externalID string) (bool, error) {
-	user, err := u.UserRepository.GetByExternalID(externalID)
+func (u UserUseCases) DoesExist(externalID string) (bool, string, error) {
+	user, document, err := u.UserRepository.GetByExternalID(externalID)
 	if err != nil {
-		return false, errors.New(consts.INTERNAL, err)
+		return false, "", errors.New(consts.INTERNAL, err)
 	}
 
 	if user.ExternalID != "" {
-		return true, nil
+		return true, document, nil
 	}
 
-	return false, nil
+	return false, "", nil
 }

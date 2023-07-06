@@ -8,8 +8,9 @@ import (
 	"google.golang.org/api/iterator"
 )
 
-func (r *UserRepository) GetByExternalID(externalID string) (entities.User, error) {
+func (r *UserRepository) GetByExternalID(externalID string) (entities.User, string, error) {
 	var firestoreUser types.FirestoreUser
+	var document string
 	query := r.DB.Collection("users").Where("external_id", "==", externalID).Limit(1)
 
 	iter := query.Documents(context.Background())
@@ -20,10 +21,10 @@ func (r *UserRepository) GetByExternalID(externalID string) (entities.User, erro
 			break
 		}
 		if err != nil {
-			return entities.User{}, nil
+			return entities.User{}, "", err
 		}
 		doc.DataTo(&firestoreUser)
 	}
 
-	return types.MapUserFirestoreToEntity(firestoreUser), nil
+	return types.MapUserFirestoreToEntity(firestoreUser), document, nil
 }
