@@ -17,7 +17,7 @@ func (m Middlewares) ValidateToken() gin.HandlerFunc {
 
 		if authorization == nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, httpinfra.Response{
-				Error: fmt.Sprintf("%s: token in authorization header is required", consts.UNAUTHORIZED),
+				Error: fmt.Sprintf("%s: token in authorization header is required", consts.Errors.UNAUTHORIZED),
 			})
 			return
 		}
@@ -27,7 +27,7 @@ func (m Middlewares) ValidateToken() gin.HandlerFunc {
 		token, err := jwtauth.ParseJWT(tokenStr)
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, httpinfra.Response{
-				Error: fmt.Sprintf("%s: %s", consts.UNAUTHORIZED, err.Error()),
+				Error: fmt.Sprintf("%s: %s", consts.Errors.UNAUTHORIZED, err.Error()),
 			})
 			return
 		}
@@ -35,7 +35,7 @@ func (m Middlewares) ValidateToken() gin.HandlerFunc {
 		externalID, err := jwtauth.GetExternalIDFromClaims(token)
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, httpinfra.Response{
-				Error: fmt.Sprintf("%s: %s", consts.UNAUTHORIZED, err.Error()),
+				Error: fmt.Sprintf("%s: %s", consts.Errors.UNAUTHORIZED, err.Error()),
 			})
 			return
 		}

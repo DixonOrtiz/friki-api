@@ -18,7 +18,7 @@ func (co UserControllers) Update(c *gin.Context) {
 	externalID := c.Param("external_id")
 	if externalID == "" {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
-			Error: errors.New(consts.BAD_REQUEST, "external_id is required in path").Error(),
+			Error: errors.New(consts.Errors.BAD_REQUEST, "external_id is required in path").Error(),
 		})
 		return
 	}

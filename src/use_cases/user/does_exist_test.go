@@ -1,6 +1,7 @@
 package userusecases
 
 import (
+	goerrors "errors"
 	userrepo "frikiapi/src/adapters/repositories/user"
 	"frikiapi/src/entities"
 	"testing"
@@ -9,14 +10,6 @@ import (
 )
 
 func TestDoesExist(t *testing.T) {
-	var testUser = entities.User{
-		ExternalID: "test_external_id",
-		Name:       "Matías Ariel",
-		LastName:   "Fernández Fernández",
-		Email:      "matias.fernandez@gmail.com",
-		Picture:    "https://www.latercera.com/resizer/-IUFynLZwc1L_2tw3OuYwnJErRk=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/XP434CUEFNH7FMXNR4PAQ4RBAY.jpeg",
-	}
-
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetByExternalID").Return(testUser, "test_user_doc", nil)
 
@@ -26,5 +19,39 @@ func TestDoesExist(t *testing.T) {
 
 	assert.True(t, exist)
 	assert.Equal(t, "test_user_doc", document)
+	assert.Nil(t, err)
+}
+
+func TestDoesExistWithError(t *testing.T) {
+	userRepository := new(userrepo.MockUserRepository)
+	userRepository.On("GetByExternalID").Return(
+		testUser,
+		"test_user_doc",
+		goerrors.New("there was an error interacting with db"),
+	)
+
+	userUseCases := MakeUserUseCases(userRepository)
+
+	exist, document, err := userUseCases.DoesExist("test_external_id")
+
+	assert.False(t, exist)
+	assert.Zero(t, document)
+	assert.ErrorContains(t, err, "internal: there was an error interacting with db")
+}
+
+func TestDoesNotExist(t *testing.T) {
+	userRepository := new(userrepo.MockUserRepository)
+	userRepository.On("GetByExternalID").Return(
+		entities.User{},
+		"",
+		nil,
+	)
+
+	userUseCases := MakeUserUseCases(userRepository)
+
+	exist, document, err := userUseCases.DoesExist("test_external_id")
+
+	assert.False(t, exist)
+	assert.Zero(t, document)
 	assert.Nil(t, err)
 }
