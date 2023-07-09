@@ -19,10 +19,10 @@ func (m *MockUserRepository) GetByExternalID(externalID string) (entities.User, 
 
 func (m *MockUserRepository) Create(user entities.User) error {
 	args := m.Called()
-	return args.Error(1)
+	return args.Error(0)
 }
 
 func (m *MockUserRepository) Update(document string, user entities.User) error {
 	args := m.Called()
-	return args.Error(1)
+	return args.Error(0)
 }

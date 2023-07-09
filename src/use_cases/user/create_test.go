@@ -38,3 +38,35 @@ func TestTryToCreateAnExistingUser(t *testing.T) {
 	assert.False(t, created)
 	assert.Nil(t, err)
 }
+
+func TestCreateWithErrorInCreate(t *testing.T) {
+	userRepository := new(userrepo.MockUserRepository)
+	userRepository.On("GetByExternalID").Return(
+		entities.User{},
+		"",
+		nil,
+	)
+	userRepository.On("Create").Return(goerrors.New("there was an error creating user"))
+	userUseCases := MakeUserUseCases(userRepository)
+
+	created, err := userUseCases.Create(testUser)
+
+	assert.False(t, created)
+	assert.ErrorContains(t, err, "internal: there was an error creating user")
+}
+
+func TestCreateWithSuccess(t *testing.T) {
+	userRepository := new(userrepo.MockUserRepository)
+	userRepository.On("GetByExternalID").Return(
+		entities.User{},
+		"",
+		nil,
+	)
+	userRepository.On("Create").Return(nil)
+	userUseCases := MakeUserUseCases(userRepository)
+
+	created, err := userUseCases.Create(testUser)
+
+	assert.True(t, created)
+	assert.Nil(t, err)
+}
