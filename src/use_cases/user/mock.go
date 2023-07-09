@@ -19,3 +19,8 @@ func (m *MockUserUseCases) Update(user entities.User) error {
 	args := m.Called()
 	return args.Error(0)
 }
+
+func (m *MockUserUseCases) GetByID(iD string) (entities.User, error) {
+	args := m.Called()
+	return args.Get(0).(entities.User), args.Error(1)
+}

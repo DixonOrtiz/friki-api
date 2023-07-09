@@ -5,7 +5,6 @@ import (
 	httputils "frikiapi/src/adapters/http/utils"
 	"frikiapi/src/entities"
 	httpinfra "frikiapi/src/infraestructure/http"
-	"frikiapi/src/utils/consts"
 	"frikiapi/src/utils/errors"
 	"net/http"
 
@@ -15,10 +14,10 @@ import (
 func (co UserControllers) Update(c *gin.Context) {
 	var body types.UpdateUserDTO
 
-	externalID := c.Param("external_id")
-	if externalID == "" {
+	ID := c.Param("id")
+	if ID == "" {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
-			Error: errors.New(consts.Errors.BAD_REQUEST, "external_id is required in path").Error(),
+			Error: errors.New(errors.BAD_REQUEST, "id is required in path").Error(),
 		})
 		return
 	}
@@ -32,10 +31,10 @@ func (co UserControllers) Update(c *gin.Context) {
 	}
 
 	err = co.UserUseCases.Update(entities.User{
-		ExternalID: externalID,
-		Name:       body.Name,
-		LastName:   body.LastName,
-		Picture:    body.Picture,
+		ID:       ID,
+		Name:     body.Name,
+		LastName: body.LastName,
+		Picture:  body.Picture,
 	})
 	if err != nil {
 		c.JSON(errors.GetStatusByErr(err), httpinfra.Response{

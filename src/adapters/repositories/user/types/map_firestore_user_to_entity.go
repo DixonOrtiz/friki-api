@@ -6,6 +6,7 @@ import (
 
 func MapUserFirestoreToEntity(firestoreUser FirestoreUser) entities.User {
 	return entities.User{
+		ID:         firestoreUser.ID,
 		ExternalID: firestoreUser.ExternalID,
 		Name:       firestoreUser.Name,
 		LastName:   firestoreUser.LastName,

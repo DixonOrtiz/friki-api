@@ -1,9 +1,20 @@
-- Repasar login (v)
-- Endpoint de creación de tienda
-- Módulo de direcciones de Chile
-- Crear producto
-- Listar productos
-- Editar productos
+- OAuth:
+    - Login (t)
+
+- User:
+    - Create (t)
+    - Update (t)
+    - GetByID (t)
+
+- Authorization:
+    - AuthorizeResource
+
+- Address
+    - CreateUserAddress
+    - CreateStoreAddress
+    - UpdateAddress
+    
+    
 
 
-go test ./...
+go test ./... -count=1

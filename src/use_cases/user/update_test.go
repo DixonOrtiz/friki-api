@@ -11,7 +11,7 @@ import (
 
 func TestUpdateUserWithErrorInDoesExist(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
-	userRepository.On("GetByExternalID").Return(
+	userRepository.On("GetByID").Return(
 		entities.User{},
 		"",
 		goerrors.New("there was an error verifing the user existence"),
@@ -25,7 +25,7 @@ func TestUpdateUserWithErrorInDoesExist(t *testing.T) {
 
 func TestUpdateAUserThatDoesNotExist(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
-	userRepository.On("GetByExternalID").Return(
+	userRepository.On("GetByID").Return(
 		entities.User{},
 		"",
 		nil,
@@ -33,16 +33,16 @@ func TestUpdateAUserThatDoesNotExist(t *testing.T) {
 	userUseCases := MakeUserUseCases(userRepository)
 
 	user := testUser
-	user.ExternalID = "1q2w3e4r5t"
+	user.ID = "test_id"
 
 	err := userUseCases.Update(user)
 
-	assert.ErrorContains(t, err, "not_found: user with external_id '1q2w3e4r5t' is not in the registers")
+	assert.ErrorContains(t, err, "not_found: user with id 'test_id' is not in the registers")
 }
 
 func TestUpdateUserWithErrorInUpdate(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
-	userRepository.On("GetByExternalID").Return(
+	userRepository.On("GetByID").Return(
 		testUser,
 		document,
 		nil,
@@ -59,7 +59,7 @@ func TestUpdateUserWithErrorInUpdate(t *testing.T) {
 
 func TestUpdateUserWithSuccess(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
-	userRepository.On("GetByExternalID").Return(
+	userRepository.On("GetByID").Return(
 		testUser,
 		document,
 		nil,

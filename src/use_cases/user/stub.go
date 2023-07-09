@@ -1,8 +1,11 @@
 package userusecases
 
-import "frikiapi/src/entities"
+import (
+	"frikiapi/src/entities"
+)
 
 var testUser = entities.User{
+	ID:         "test_id",
 	ExternalID: "test_external_id",
 	Name:       "Matías Ariel",
 	LastName:   "Fernández Fernández",

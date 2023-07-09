@@ -1,17 +1,16 @@
 package errors
 
 import (
-	"frikiapi/src/utils/consts"
 	"net/http"
 	"strings"
 )
 
 var errorsAndStatuses = map[string]int{
-	consts.Errors.INTERNAL:      http.StatusInternalServerError,
-	consts.Errors.UNAUTHORIZED:  http.StatusUnauthorized,
-	consts.Errors.UNPROCESSABLE: http.StatusUnprocessableEntity,
-	consts.Errors.NOT_FOUND:     http.StatusNotFound,
-	consts.Errors.BAD_REQUEST:   http.StatusBadRequest,
+	INTERNAL:      http.StatusInternalServerError,
+	UNAUTHORIZED:  http.StatusUnauthorized,
+	UNPROCESSABLE: http.StatusUnprocessableEntity,
+	NOT_FOUND:     http.StatusNotFound,
+	BAD_REQUEST:   http.StatusBadRequest,
 }
 
 func GetStatusByErr(err error) int {
