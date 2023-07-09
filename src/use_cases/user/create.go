@@ -7,12 +7,12 @@ import (
 )
 
 func (u UserUseCases) Create(user entities.User) (bool, error) {
-	exists, _, err := u.DoesExist(user.ExternalID)
+	foundUser, _, err := u.UserRepository.GetByExternalID(user.ExternalID)
 	if err != nil {
 		return false, errors.New(consts.Errors.INTERNAL, err)
 	}
 
-	if exists {
+	if foundUser.ExternalID != "" {
 		return false, nil
 	}
 

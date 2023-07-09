@@ -35,7 +35,6 @@ func (co UserControllers) Update(c *gin.Context) {
 		ExternalID: externalID,
 		Name:       body.Name,
 		LastName:   body.LastName,
-		Email:      body.Email,
 		Picture:    body.Picture,
 	})
 	if err != nil {
@@ -47,7 +46,7 @@ func (co UserControllers) Update(c *gin.Context) {
 
 	c.JSON(http.StatusOK, httpinfra.Response{
 		Data: map[string]string{
-			"external_id": externalID,
+			"message": "user updated successfully",
 		},
 	})
 }

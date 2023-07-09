@@ -9,64 +9,65 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCreateUserWithErrorInDoesExist(t *testing.T) {
+func TestUpdateUserWithErrorInDoesExist(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetByExternalID").Return(
-		testUser,
-		"test_user_doc",
+		entities.User{},
+		"",
 		goerrors.New("there was an error verifing the user existence"),
 	)
 	userUseCases := MakeUserUseCases(userRepository)
 
-	created, err := userUseCases.Create(testUser)
+	err := userUseCases.Update(testUser)
 
-	assert.False(t, created)
 	assert.ErrorContains(t, err, "internal: there was an error verifing the user existence")
 }
 
-func TestTryToCreateAnExistingUser(t *testing.T) {
-	userRepository := new(userrepo.MockUserRepository)
-	userRepository.On("GetByExternalID").Return(
-		entities.User{ExternalID: "test_user_doc"},
-		"",
-		nil,
-	)
-	userUseCases := MakeUserUseCases(userRepository)
-
-	created, err := userUseCases.Create(testUser)
-
-	assert.False(t, created)
-	assert.Nil(t, err)
-}
-
-func TestCreateUserWithErrorInCreate(t *testing.T) {
+func TestUpdateAUserThatDoesNotExist(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetByExternalID").Return(
 		entities.User{},
 		"",
 		nil,
 	)
-	userRepository.On("Create").Return(goerrors.New("there was an error creating user"))
 	userUseCases := MakeUserUseCases(userRepository)
 
-	created, err := userUseCases.Create(testUser)
+	user := testUser
+	user.ExternalID = "1q2w3e4r5t"
 
-	assert.False(t, created)
-	assert.ErrorContains(t, err, "internal: there was an error creating user")
+	err := userUseCases.Update(user)
+
+	assert.ErrorContains(t, err, "not_found: user with external_id '1q2w3e4r5t' is not in the registers")
 }
 
-func TestCreateUserWithSuccess(t *testing.T) {
+func TestUpdateUserWithErrorInUpdate(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetByExternalID").Return(
-		entities.User{},
-		"",
+		testUser,
+		document,
 		nil,
 	)
-	userRepository.On("Create").Return(nil)
+	userRepository.On("Update").Return(
+		goerrors.New("there was an error updating user"),
+	)
 	userUseCases := MakeUserUseCases(userRepository)
 
-	created, err := userUseCases.Create(testUser)
+	err := userUseCases.Update(testUser)
 
-	assert.True(t, created)
+	assert.ErrorContains(t, err, "internal: there was an error updating user")
+}
+
+func TestUpdateUserWithSuccess(t *testing.T) {
+	userRepository := new(userrepo.MockUserRepository)
+	userRepository.On("GetByExternalID").Return(
+		testUser,
+		document,
+		nil,
+	)
+	userRepository.On("Update").Return(nil)
+	userUseCases := MakeUserUseCases(userRepository)
+
+	err := userUseCases.Update(testUser)
+
 	assert.Nil(t, err)
 }

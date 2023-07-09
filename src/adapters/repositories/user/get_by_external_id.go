@@ -24,6 +24,8 @@ func (r *UserRepository) GetByExternalID(externalID string) (entities.User, stri
 			return entities.User{}, "", err
 		}
 		doc.DataTo(&firestoreUser)
+		document = doc.Ref.ID
+
 	}
 
 	return types.MapUserFirestoreToEntity(firestoreUser), document, nil

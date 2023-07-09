@@ -11,5 +11,7 @@ func MapUserFirestoreToEntity(firestoreUser FirestoreUser) entities.User {
 		LastName:   firestoreUser.LastName,
 		Email:      firestoreUser.Email,
 		Picture:    firestoreUser.Picture,
+		CreatedAt:  firestoreUser.CreatedAt,
+		UpdatedAt:  firestoreUser.UpdatedAt,
 	}
 }
