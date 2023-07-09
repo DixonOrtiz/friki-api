@@ -24,10 +24,9 @@ func (co *OAuthControllers) GoogleCallback(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, httpinfra.Response{
-		Data: CallbackResponseData{
-			Token:   token,
-			Created: created,
-		},
-	})
+	c.JSON(http.StatusOK, CallbackResponseData{
+		Token:   token,
+		Created: created,
+	},
+	)
 }

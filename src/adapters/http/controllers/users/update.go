@@ -45,8 +45,6 @@ func (co UserControllers) Update(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, httpinfra.Response{
-		Data: map[string]string{
-			"message": "user updated successfully",
-		},
+		Message: "user updated successfully",
 	})
 }
