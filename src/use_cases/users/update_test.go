@@ -4,6 +4,7 @@ import (
 	goerrors "errors"
 	userrepo "frikiapi/src/adapters/repositories/users"
 	"frikiapi/src/entities"
+	permusecases "frikiapi/src/use_cases/permissions"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -16,7 +17,8 @@ func TestUpdateUserWithErrorInDoesExist(t *testing.T) {
 		"",
 		goerrors.New("there was an error verifing the user existence"),
 	)
-	userUseCases := MakeUserUseCases(userRepository)
+	permissionUseCases := new(permusecases.MockPermissionUseCases)
+	userUseCases := MakeUserUseCases(userRepository, permissionUseCases)
 
 	err := userUseCases.Update(testUser)
 
@@ -30,7 +32,8 @@ func TestUpdateAUserThatDoesNotExist(t *testing.T) {
 		"",
 		nil,
 	)
-	userUseCases := MakeUserUseCases(userRepository)
+	permissionUseCases := new(permusecases.MockPermissionUseCases)
+	userUseCases := MakeUserUseCases(userRepository, permissionUseCases)
 
 	user := testUser
 	user.ID = "test_id"
@@ -50,7 +53,8 @@ func TestUpdateUserWithErrorInUpdate(t *testing.T) {
 	userRepository.On("Update").Return(
 		goerrors.New("there was an error updating user"),
 	)
-	userUseCases := MakeUserUseCases(userRepository)
+	permissionUseCases := new(permusecases.MockPermissionUseCases)
+	userUseCases := MakeUserUseCases(userRepository, permissionUseCases)
 
 	err := userUseCases.Update(testUser)
 
@@ -65,7 +69,8 @@ func TestUpdateUserWithSuccess(t *testing.T) {
 		nil,
 	)
 	userRepository.On("Update").Return(nil)
-	userUseCases := MakeUserUseCases(userRepository)
+	permissionUseCases := new(permusecases.MockPermissionUseCases)
+	userUseCases := MakeUserUseCases(userRepository, permissionUseCases)
 
 	err := userUseCases.Update(testUser)
 

@@ -30,5 +30,10 @@ func (u UserUseCases) Create(user entities.User) (string, bool, error) {
 		return "", false, errors.New(errors.INTERNAL, err)
 	}
 
+	_, err = u.PermissionUseCases.Create(user.ID)
+	if err != nil {
+		return user.ID, true, errors.New(errors.INTERNAL, err)
+	}
+
 	return user.ID, true, nil
 }

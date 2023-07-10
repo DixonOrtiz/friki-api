@@ -4,6 +4,7 @@ import (
 	goerrors "errors"
 	userrepo "frikiapi/src/adapters/repositories/users"
 	"frikiapi/src/entities"
+	permusecases "frikiapi/src/use_cases/permissions"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -16,7 +17,8 @@ func TestFindByIDWithError(t *testing.T) {
 		"test_user_doc",
 		goerrors.New("there was an error getting the user"),
 	)
-	userUseCases := MakeUserUseCases(userRepository)
+	permissionUseCases := new(permusecases.MockPermissionUseCases)
+	userUseCases := MakeUserUseCases(userRepository, permissionUseCases)
 
 	user, err := userUseCases.GetByID(testUser.ID)
 
@@ -31,7 +33,8 @@ func TestFindByIDWithUserNotFound(t *testing.T) {
 		"",
 		nil,
 	)
-	userUseCases := MakeUserUseCases(userRepository)
+	permissionUseCases := new(permusecases.MockPermissionUseCases)
+	userUseCases := MakeUserUseCases(userRepository, permissionUseCases)
 
 	user, err := userUseCases.GetByID(testUser.ID)
 
@@ -46,7 +49,8 @@ func TestFindByIDWithSuccess(t *testing.T) {
 		"",
 		nil,
 	)
-	userUseCases := MakeUserUseCases(userRepository)
+	permissionUseCases := new(permusecases.MockPermissionUseCases)
+	userUseCases := MakeUserUseCases(userRepository, permissionUseCases)
 
 	user, err := userUseCases.GetByID(testUser.ID)
 
