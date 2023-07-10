@@ -32,7 +32,7 @@ func (m Middlewares) ValidateToken() gin.HandlerFunc {
 			return
 		}
 
-		externalID, err := jwtauth.GetExternalIDFromClaims(token)
+		userID, err := jwtauth.GetUserIDFromClaims(token)
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, httpinfra.Response{
 				Error: fmt.Sprintf("%s: %s", errors.UNAUTHORIZED, err.Error()),
@@ -40,7 +40,14 @@ func (m Middlewares) ValidateToken() gin.HandlerFunc {
 			return
 		}
 
-		c.Set("external_id", externalID)
+		if userID == "<nil>" {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, httpinfra.Response{
+				Error: fmt.Sprintf("%s: %s", errors.UNAUTHORIZED, "user_id is required in header token"),
+			})
+			return
+		}
+
+		c.Set("user_id", userID)
 		c.Next()
 	}
 }

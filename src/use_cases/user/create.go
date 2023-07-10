@@ -8,14 +8,14 @@ import (
 	"github.com/google/uuid"
 )
 
-func (u UserUseCases) Create(user entities.User) (bool, error) {
+func (u UserUseCases) Create(user entities.User) (string, bool, error) {
 	foundUser, _, err := u.UserRepository.GetByExternalID(user.ExternalID)
 	if err != nil {
-		return false, errors.New(errors.INTERNAL, err)
+		return "", false, errors.New(errors.INTERNAL, err)
 	}
 
-	if foundUser.ExternalID != "" {
-		return false, nil
+	if foundUser.ID != "" {
+		return foundUser.ID, false, nil
 	}
 
 	uid := uuid.New()
@@ -27,8 +27,8 @@ func (u UserUseCases) Create(user entities.User) (bool, error) {
 
 	err = u.UserRepository.Create(user)
 	if err != nil {
-		return false, errors.New(errors.INTERNAL, err)
+		return "", false, errors.New(errors.INTERNAL, err)
 	}
 
-	return true, nil
+	return user.ID, true, nil
 }

@@ -18,8 +18,9 @@ func TestCreateUserWithErrorInDoesExist(t *testing.T) {
 	)
 	userUseCases := MakeUserUseCases(userRepository)
 
-	created, err := userUseCases.Create(testUser)
+	userID, created, err := userUseCases.Create(testUser)
 
+	assert.Zero(t, userID)
 	assert.False(t, created)
 	assert.ErrorContains(t, err, "internal: there was an error verifing the user existence")
 }
@@ -27,14 +28,15 @@ func TestCreateUserWithErrorInDoesExist(t *testing.T) {
 func TestTryToCreateAnExistingUser(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetByExternalID").Return(
-		entities.User{ExternalID: "test_user_doc"},
+		entities.User{ID: "test_id"},
 		"",
 		nil,
 	)
 	userUseCases := MakeUserUseCases(userRepository)
 
-	created, err := userUseCases.Create(testUser)
+	userID, created, err := userUseCases.Create(testUser)
 
+	assert.Equal(t, "test_id", userID)
 	assert.False(t, created)
 	assert.Nil(t, err)
 }
@@ -49,8 +51,9 @@ func TestCreateUserWithErrorInCreate(t *testing.T) {
 	userRepository.On("Create").Return(goerrors.New("there was an error creating user"))
 	userUseCases := MakeUserUseCases(userRepository)
 
-	created, err := userUseCases.Create(testUser)
+	userID, created, err := userUseCases.Create(testUser)
 
+	assert.Zero(t, userID)
 	assert.False(t, created)
 	assert.ErrorContains(t, err, "internal: there was an error creating user")
 }
@@ -65,8 +68,9 @@ func TestCreateUserWithSuccess(t *testing.T) {
 	userRepository.On("Create").Return(nil)
 	userUseCases := MakeUserUseCases(userRepository)
 
-	created, err := userUseCases.Create(testUser)
+	userID, created, err := userUseCases.Create(testUser)
 
+	assert.NotZero(t, userID)
 	assert.True(t, created)
 	assert.Nil(t, err)
 }

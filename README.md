@@ -6,13 +6,14 @@
     - Update (t)
     - GetByID (t)
 
+- Address
+    - CreateAddress
+
 - Authorization:
     - AuthorizeResource
 
 - Address
-    - CreateUserAddress
-    - CreateStoreAddress
-    - UpdateAddress
+    - GetAddress (probar el middleware de authorization con el address)
     
     
 

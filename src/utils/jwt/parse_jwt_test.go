@@ -7,7 +7,7 @@ import (
 )
 
 func TestParseJWT(t *testing.T) {
-	tokenStr, _ := GenerateJWT(externalIDInput)
+	tokenStr, _ := GenerateJWT(IDInput)
 
 	token, err := ParseJWT(tokenStr)
 

@@ -65,6 +65,7 @@ func TestLoginWithErrorCreatingUser(t *testing.T) {
 	)
 	userUseCases := new(userusecases.MockUserUseCases)
 	userUseCases.On("Create").Return(
+		"",
 		false,
 		goerrors.New("there was an error creating user"),
 	)
@@ -91,6 +92,7 @@ func TestLoginWithSuccess(t *testing.T) {
 	)
 	userUseCases := new(userusecases.MockUserUseCases)
 	userUseCases.On("Create").Return(
+		"test_id",
 		true,
 		nil,
 	)

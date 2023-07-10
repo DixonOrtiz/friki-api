@@ -12,10 +12,10 @@ func TestGenerateJWT(t *testing.T) {
 	os.Setenv("JWT_KEY", testJWTKey)
 	time.PatchTimeNow()
 
-	tokenStr, err := GenerateJWT(externalIDInput)
+	tokenStr, err := GenerateJWT(IDInput)
 	externalID, exp := GetClaimsFromTestToken(tokenStr)
 
-	assert.Equal(t, expectedExternalID, externalID)
+	assert.Equal(t, expectedID, externalID)
 	assert.Equal(t, expectedExp, exp)
 	assert.Nil(t, err)
 }

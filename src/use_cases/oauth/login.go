@@ -16,12 +16,12 @@ func (u OAuthUseCases) Login(code string) (string, bool, error) {
 		return "", false, errors.New(errors.INTERNAL, err)
 	}
 
-	created, err := u.UserUseCases.Create(externalUser)
+	userID, created, err := u.UserUseCases.Create(externalUser)
 	if err != nil {
 		return "", false, errors.New(errors.INTERNAL, err)
 	}
 
-	token, err := jwtauth.GenerateJWT(externalUser.ExternalID)
+	token, err := jwtauth.GenerateJWT(userID)
 	if err != nil {
 		return "", false, errors.New(errors.INTERNAL, err)
 	}
