@@ -1,7 +1,6 @@
 package userusecases
 
-import userrepository "frikiapi/src/adapters/repositories/user"
-
+import userrepository "frikiapi/src/adapters/repositories/users"
 
 type UserUseCases struct {
 	UserRepository userrepository.IUserRepository

@@ -1,6 +1,6 @@
 package userusecases
 
-import userrepository "frikiapi/src/adapters/repositories/user"
+import userrepository "frikiapi/src/adapters/repositories/users"
 
 func MakeUserUseCases(
 	userRepository userrepository.IUserRepository,

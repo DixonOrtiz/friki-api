@@ -2,7 +2,7 @@ package userusecases
 
 import (
 	goerrors "errors"
-	userrepo "frikiapi/src/adapters/repositories/user"
+	userrepo "frikiapi/src/adapters/repositories/users"
 	"frikiapi/src/entities"
 	"testing"
 

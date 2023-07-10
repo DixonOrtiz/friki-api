@@ -2,7 +2,7 @@ package userrepo
 
 import (
 	"context"
-	"frikiapi/src/adapters/repositories/user/types"
+	"frikiapi/src/adapters/repositories/users/types"
 	"frikiapi/src/entities"
 )
 

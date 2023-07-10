@@ -3,9 +3,9 @@ package authusecases
 import (
 	goerrors "errors"
 	oauthrepository "frikiapi/src/adapters/repositories/oauth"
-	googleuserrepo "frikiapi/src/adapters/repositories/user/google"
+	googleuserrepo "frikiapi/src/adapters/repositories/users/google"
 	"frikiapi/src/entities"
-	userusecases "frikiapi/src/use_cases/user"
+	userusecases "frikiapi/src/use_cases/users"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

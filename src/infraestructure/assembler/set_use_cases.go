@@ -2,13 +2,13 @@ package assembler
 
 import (
 	oauthusecases "frikiapi/src/use_cases/oauth"
-	userusecases "frikiapi/src/use_cases/user"
+	userusecases "frikiapi/src/use_cases/users"
 )
 
 func (a *Assembler) setUseCases() {
 	a.setUserUseCases()
 	a.setAuthUseCases()
-	
+
 }
 
 func (a *Assembler) setUserUseCases() {
@@ -24,5 +24,3 @@ func (a *Assembler) setAuthUseCases() {
 		a.useCases.User,
 	)
 }
-
-

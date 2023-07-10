@@ -2,8 +2,8 @@ package types
 
 import (
 	oauthrepo "frikiapi/src/adapters/repositories/oauth"
-	userrepo "frikiapi/src/adapters/repositories/user"
-	googleuserrepo "frikiapi/src/adapters/repositories/user/google"
+	userrepo "frikiapi/src/adapters/repositories/users"
+	googleuserrepo "frikiapi/src/adapters/repositories/users/google"
 )
 
 type Repositories struct {
