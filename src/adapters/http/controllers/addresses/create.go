@@ -13,6 +13,15 @@ import (
 
 func (co AddressControllers) Create(c *gin.Context) {
 	var body types.CreateAddressDTO
+	userID, exists := c.Get("user_id")
+	if !exists {
+		c.JSON(http.StatusBadRequest, httpinfra.Response{
+			Error: errors.New(
+				errors.BAD_REQUEST,
+				"user_id is required in header auth token",
+			)})
+		return
+	}
 
 	err := c.ShouldBindJSON(&body)
 	if err != nil {
@@ -22,7 +31,18 @@ func (co AddressControllers) Create(c *gin.Context) {
 		return
 	}
 
-	err = co.AddressUseCases.Create(entities.Address{})
+	_, err = co.AddressUseCases.Create(entities.Address{
+		UserID:           userID.(string),
+		Name:             body.Name,
+		City:             body.City,
+		Commune:          body.Commune,
+		Street:           body.Street,
+		Number:           body.Number,
+		Apartment:        body.Apartment,
+		Sector:           body.Sector,
+		Type:             body.Type,
+		ExtraInformation: body.ExtraInformation,
+	})
 	if err != nil {
 		c.JSON(errors.GetStatusByErr(err), httpinfra.Response{
 			Error: err.Error(),

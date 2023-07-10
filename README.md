@@ -7,7 +7,7 @@
     - GetByID (t)
 
 - Address
-    - CreateAddress
+    - CreateAddress (t)
 
 - Authorization:
     - AuthorizeResource

@@ -1,6 +1,7 @@
 package assembler
 
 import (
+	addressrepo "frikiapi/src/adapters/repositories/addresses"
 	oauthrepo "frikiapi/src/adapters/repositories/oauth"
 	userrepo "frikiapi/src/adapters/repositories/users"
 	googleuserrepo "frikiapi/src/adapters/repositories/users/google"
@@ -10,6 +11,7 @@ func (a *Assembler) setRepositories() {
 	a.setUserRepository()
 	a.setOAuthRepository()
 	a.setExternalUserRepository()
+	a.setAddressRepository()
 }
 
 func (a *Assembler) setUserRepository() {
@@ -24,4 +26,8 @@ func (a *Assembler) setOAuthRepository() {
 
 func (a *Assembler) setExternalUserRepository() {
 	a.repositories.ExternalUser = googleuserrepo.MakeUserRepository()
+}
+
+func (a *Assembler) setAddressRepository() {
+	a.repositories.Address = addressrepo.MakeAddressRepository(a.infraestructure.DB)
 }

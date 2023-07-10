@@ -14,10 +14,10 @@ import (
 func (co UserControllers) Update(c *gin.Context) {
 	var body types.UpdateUserDTO
 
-	ID := c.Param("id")
+	ID := c.Param("user_id")
 	if ID == "" {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
-			Error: errors.New(errors.BAD_REQUEST, "id is required in path").Error(),
+			Error: errors.New(errors.BAD_REQUEST, "user_id is required in path").Error(),
 		})
 		return
 	}
