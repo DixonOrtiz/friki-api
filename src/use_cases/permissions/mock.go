@@ -14,3 +14,8 @@ func (m *MockPermissionUseCases) Create(userID string) (entities.Permission, err
 	args := m.Called()
 	return args.Get(0).(entities.Permission), args.Error(1)
 }
+
+func (m *MockPermissionUseCases) AddResource(resource string, userID string, resourceID string) error {
+	args := m.Called()
+	return args.Error(0)
+}

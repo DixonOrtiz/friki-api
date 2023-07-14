@@ -38,5 +38,6 @@ func (a *Assembler) setAuthUseCases() {
 func (a *Assembler) setAddressUseCases() {
 	a.useCases.Address = addressusecases.MakeAddressUseCases(
 		a.repositories.Address,
+		a.useCases.Permission,
 	)
 }

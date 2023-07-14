@@ -3,6 +3,7 @@ package addressusecases
 import (
 	"frikiapi/src/entities"
 	"frikiapi/src/utils/errors"
+	"frikiapi/src/utils/permissions"
 	"time"
 
 	"github.com/google/uuid"
@@ -21,7 +22,14 @@ func (u AddressUseCases) Create(address entities.Address) (entities.Address, err
 		return entities.Address{}, errors.New(errors.INTERNAL, err)
 	}
 
-	// crear permiso
+	err = u.PermissionUseCases.AddResource(
+		permissions.ADDRESS,
+		address.UserID,
+		address.ID,
+	)
+	if err != nil {
+		return entities.Address{}, errors.New(errors.INTERNAL, err)
+	}
 
 	return address, nil
 }
