@@ -1,5 +1,5 @@
 package permissions
 
 var (
-	ADDRESS = "address"
+	ADDRESS_ID = "address_id"
 )

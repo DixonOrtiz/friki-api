@@ -9,6 +9,7 @@ type FirestoreUser struct {
 	LastName   string    `firestore:"last_name"`
 	Email      string    `firestore:"email"`
 	Picture    string    `firestore:"picture"`
+	Role       string    `firestore:"role"`
 	CreatedAt  time.Time `firestore:"created_at"`
 	UpdatedAt  time.Time `firestore:"updated_at"`
 }

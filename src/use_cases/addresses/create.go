@@ -23,7 +23,7 @@ func (u AddressUseCases) Create(address entities.Address) (entities.Address, err
 	}
 
 	err = u.PermissionUseCases.AddResource(
-		permissions.ADDRESS,
+		permissions.ADDRESS_ID,
 		address.UserID,
 		address.ID,
 	)

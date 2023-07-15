@@ -19,3 +19,8 @@ func (m *MockPermissionUseCases) AddResource(resource string, userID string, res
 	args := m.Called()
 	return args.Error(0)
 }
+
+func (m *MockPermissionUseCases) Authorize(JWTUserID string, userID string, resources map[string]string) error {
+	args := m.Called()
+	return args.Error(0)
+}

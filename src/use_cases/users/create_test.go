@@ -1,7 +1,6 @@
 package userusecases
 
 import (
-	"errors"
 	goerrors "errors"
 	userrepo "frikiapi/src/adapters/repositories/users"
 	"frikiapi/src/entities"
@@ -72,7 +71,7 @@ func TestCreateUserWithErrorInCreatePermission(t *testing.T) {
 	)
 	userRepository.On("Create").Return(nil)
 	permissionUseCases := new(permusecases.MockPermissionUseCases)
-	permissionUseCases.On("Create").Return(entities.Permission{}, errors.New("there was an error creating permission"))
+	permissionUseCases.On("Create").Return(entities.Permission{}, goerrors.New("there was an error creating permission"))
 	userUseCases := MakeUserUseCases(userRepository, permissionUseCases)
 
 	userID, created, err := userUseCases.Create(testUser)

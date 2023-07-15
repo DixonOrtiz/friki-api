@@ -23,10 +23,26 @@ func TestCreateAddressWithErrorInCreate(t *testing.T) {
 	assert.ErrorContains(t, err, "internal: there was an error creating the address")
 }
 
+func TestCreateWithErrorCreatingPermission(t *testing.T) {
+	addressRepository := new(addressrepo.MockAddressRepository)
+	addressRepository.On("Create").Return(nil)
+	permissionUseCases := new(permusecases.MockPermissionUseCases)
+	permissionUseCases.On("AddResource").Return(
+		goerrors.New("there was an error adding resource"),
+	)
+	addressUseCases := MakeAddressUseCases(addressRepository, permissionUseCases)
+
+	address, err := addressUseCases.Create(testAddress)
+
+	assert.Empty(t, address)
+	assert.ErrorContains(t, err, "internal: there was an error adding resource")
+}
+
 func TestCreateAddressWithSuccess(t *testing.T) {
 	addressRepository := new(addressrepo.MockAddressRepository)
 	addressRepository.On("Create").Return(nil)
 	permissionUseCases := new(permusecases.MockPermissionUseCases)
+	permissionUseCases.On("AddResource").Return(nil)
 	addressUseCases := MakeAddressUseCases(addressRepository, permissionUseCases)
 	expectedAddress := testAddress
 

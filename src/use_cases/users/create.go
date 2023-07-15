@@ -3,6 +3,7 @@ package userusecases
 import (
 	"frikiapi/src/entities"
 	"frikiapi/src/utils/errors"
+	"frikiapi/src/utils/permissions"
 	"time"
 
 	"github.com/google/uuid"
@@ -22,6 +23,7 @@ func (u UserUseCases) Create(user entities.User) (string, bool, error) {
 	now := time.Now()
 
 	user.ID = uid.String()
+	user.Role = permissions.USER
 	user.UpdatedAt = now
 	user.CreatedAt = now
 

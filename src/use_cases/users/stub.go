@@ -2,6 +2,7 @@ package userusecases
 
 import (
 	"frikiapi/src/entities"
+	"frikiapi/src/utils/permissions"
 )
 
 var testUser = entities.User{
@@ -11,6 +12,7 @@ var testUser = entities.User{
 	LastName:   "Fernández Fernández",
 	Email:      "matias.fernandez@gmail.com",
 	Picture:    "https://www.latercera.com/resizer/-IUFynLZwc1L_2tw3OuYwnJErRk=/900x600/smart/cloudfront-us-east-1.images.arcpublishing.com/copesa/XP434CUEFNH7FMXNR4PAQ4RBAY.jpeg",
+	Role:       permissions.USER,
 }
 
 var document = "h48inwjoC8Xc5IKDFFr1L47zutK2"
