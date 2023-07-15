@@ -10,7 +10,7 @@
     - CreateAddress (t)
 
 - Authorization:
-    - AuthorizeResource
+    - AuthorizeResource (t)
 
 - Address
     - GetAddress (probar el middleware de authorization con el address)

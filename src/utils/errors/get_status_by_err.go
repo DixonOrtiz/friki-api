@@ -6,11 +6,11 @@ import (
 )
 
 var errorsAndStatuses = map[string]int{
-	INTERNAL:      http.StatusInternalServerError,
-	UNAUTHORIZED:  http.StatusUnauthorized,
-	UNPROCESSABLE: http.StatusUnprocessableEntity,
-	NOT_FOUND:     http.StatusNotFound,
-	BAD_REQUEST:   http.StatusBadRequest,
+	INTERNAL:     http.StatusInternalServerError,
+	UNAUTHORIZED: http.StatusUnauthorized,
+	CONFLICT:     http.StatusConflict,
+	NOT_FOUND:    http.StatusNotFound,
+	BAD_REQUEST:  http.StatusBadRequest,
 }
 
 func GetStatusByErr(err error) int {

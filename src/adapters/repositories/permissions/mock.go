@@ -22,5 +22,5 @@ func (m *MockPermissionRepository) AddResource(document string, permission entit
 
 func (m *MockPermissionRepository) GetByUserID(userID string) (entities.Permission, string, error) {
 	args := m.Called()
-	return args.Get(0).(entities.Permission), args.Get(1).(string), args.Error(1)
+	return args.Get(0).(entities.Permission), args.Get(1).(string), args.Error(2)
 }

@@ -13,16 +13,19 @@ func (u PermissionUseCases) AddResource(
 ) error {
 	permission, document, err := u.PermissionRepository.GetByUserID(userID)
 	if err != nil {
-		errors.New(errors.INTERNAL, err)
+		return errors.New(errors.INTERNAL, err)
 	}
 
 	switch resource {
 	case permissions.ADDRESS:
 		permission.Addresses = append(permission.Addresses, resourceID)
-		u.PermissionRepository.AddResource(document, permission)
+		err = u.PermissionRepository.AddResource(document, permission)
+		if err != nil {
+			return errors.New(errors.INTERNAL, err)
+		}
 
 	default:
-		return errors.New(errors.UNPROCESSABLE, fmt.Sprintf(
+		return errors.New(errors.CONFLICT, fmt.Sprintf(
 			"'%s' resource is not supported",
 			resource,
 		))
