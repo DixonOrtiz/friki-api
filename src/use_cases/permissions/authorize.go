@@ -1,6 +1,7 @@
 package permusecases
 
 import (
+	"fmt"
 	"frikiapi/src/utils/errors"
 	"frikiapi/src/utils/permissions"
 	"frikiapi/src/utils/slices"
@@ -12,20 +13,23 @@ func (u PermissionUseCases) Authorize(
 	resources map[string]string,
 ) error {
 	if userID != JWTUserID {
-		errors.New(errors.UNAUTHORIZED, "path user_id and token user_id are not the same")
+		return errors.New(errors.UNAUTHORIZED, "path user_id and token user_id are not the same")
 	}
 
 	if len(resources) > 0 {
 		permission, _, err := u.PermissionRepository.GetByUserID(userID)
 		if err != nil {
-			errors.New(errors.INTERNAL, err)
+			return errors.New(errors.INTERNAL, err)
 		}
 
-		for resource, resourceID := range resources {
-			userResources := permissions.GetResourceByName(resource, permission)
+		for resource, ID := range resources {
+			userResource := permissions.GetResourceByName(resource, permission)
 
-			if !slices.Exist(userResources, resourceID) {
-				return errors.New(errors.UNAUTHORIZED, "the requested resource is not owned by this user")
+			if !slices.Exist(userResource, ID) {
+				return errors.New(
+					errors.UNAUTHORIZED,
+					fmt.Sprintf("the requested resource (%s) is not owned by this user", resource),
+				)
 			}
 		}
 

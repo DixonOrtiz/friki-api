@@ -14,10 +14,10 @@ func (a *Assembler) setRoutes() {
 }
 
 func (a *Assembler) useMiddlewares() {
-	a.middlewares = mid.MakeMiddlewares()
-
+	a.middlewares = mid.MakeMiddlewares(a.useCases.Permission)
 	a.infraestructure.ProtectedRouter = a.infraestructure.Router.Group("/")
 	a.infraestructure.ProtectedRouter.Use(a.middlewares.ValidateToken())
+	a.infraestructure.ProtectedRouter.Use(a.middlewares.Authorize())
 }
 
 func (a *Assembler) setOAuthRoutes() {

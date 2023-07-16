@@ -19,7 +19,7 @@ func TestAddResourceWithErrorGettingPermissionByID(t *testing.T) {
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.AddResource(permissions.ADDRESS_ID, "test_user_id", "test_resource_id")
+	err := permissionUseCases.AddResource(permissions.ADDRESSES, "test_user_id", "test_resource_id")
 
 	assert.ErrorContains(t, err, "internal: there was an error getting the permission")
 }
@@ -40,7 +40,7 @@ func TestAddAddressResource(t *testing.T) {
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.AddResource(permissions.ADDRESS_ID, "test_user_id", "test_resource_id")
+	err := permissionUseCases.AddResource(permissions.ADDRESSES, "test_user_id", "test_resource_id")
 
 	assert.Nil(t, err)
 }
@@ -61,7 +61,7 @@ func TestAddAddressResourceWithError(t *testing.T) {
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.AddResource(permissions.ADDRESS_ID, "test_user_id", "test_resource_id")
+	err := permissionUseCases.AddResource(permissions.ADDRESSES, "test_user_id", "test_resource_id")
 
 	assert.ErrorContains(t, err, "internal: there was an error adding permission resource")
 }

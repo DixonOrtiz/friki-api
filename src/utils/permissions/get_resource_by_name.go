@@ -4,7 +4,7 @@ import "frikiapi/src/entities"
 
 func GetResourceByName(resource string, permission entities.Permission) []string {
 	switch resource {
-	case ADDRESS_ID:
+	case ADDRESSES:
 		return permission.Addresses
 	}
 

@@ -1,5 +1,9 @@
 package middlewares
 
-func MakeMiddlewares() Middlewares {
-	return Middlewares{}
+import permusecases "frikiapi/src/use_cases/permissions"
+
+func MakeMiddlewares(permissionUseCases permusecases.IPermissionUseCases) Middlewares {
+	return Middlewares{
+		PermissionUseCases: permissionUseCases,
+	}
 }
