@@ -3,7 +3,7 @@ package entities
 import "time"
 
 type Address struct {
-	ID               string    `json:"id"` // este hay que generarle
+	ID               string    `json:"id"`
 	UserID           string    `json:"user_id"`
 	Name             string    `json:"name"`
 	City             string    `json:"city"`
@@ -14,6 +14,6 @@ type Address struct {
 	Sector           string    `json:"sector"`
 	Type             string    `json:"type"`
 	ExtraInformation string    `json:"extra_information"`
-	CreatedAt        time.Time `json:"created_at"` // se crea
-	UpdatedAt        time.Time `json:"updated_at"` // se crea
+	CreatedAt        time.Time `json:"created_at"`
+	UpdatedAt        time.Time `json:"updated_at"`
 }

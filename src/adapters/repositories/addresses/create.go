@@ -9,7 +9,7 @@ import (
 func (r *AddressRepository) Create(address entities.Address) error {
 	firestoreAddress := types.MapAddressToFirestore(address)
 
-	_, err := r.DB.Collection("addresses").NewDoc().Create(context.Background(), firestoreAddress)
+	_, err := r.DB.Collection(ADDRESSES).NewDoc().Create(context.Background(), firestoreAddress)
 	if err != nil {
 		return err
 	}

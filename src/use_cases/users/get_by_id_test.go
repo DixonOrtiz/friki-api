@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestFindByIDWithError(t *testing.T) {
+func TestGetByIDWithError(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetByID").Return(
 		testUser,
@@ -26,7 +26,7 @@ func TestFindByIDWithError(t *testing.T) {
 	assert.ErrorContains(t, err, "internal: there was an error getting the user")
 }
 
-func TestFindByIDWithUserNotFound(t *testing.T) {
+func TestGetByIDWithUserNotFound(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetByID").Return(
 		entities.User{},
@@ -42,7 +42,7 @@ func TestFindByIDWithUserNotFound(t *testing.T) {
 	assert.ErrorContains(t, err, "not_found: user with id 'test_id' does not exist")
 }
 
-func TestFindByIDWithSuccess(t *testing.T) {
+func TestGetByIDWithSuccess(t *testing.T) {
 	userRepository := new(userrepo.MockUserRepository)
 	userRepository.On("GetByID").Return(
 		testUser,

@@ -3,7 +3,8 @@ package addressusecases
 import "frikiapi/src/entities"
 
 var testAddress = entities.Address{
-	UserID:           "1q2w3w",
+	ID:               "test_address_id",
+	UserID:           "test_user_id",
 	Name:             "Mi casa",
 	City:             "Santiago",
 	Commune:          "Santiago Centro",
