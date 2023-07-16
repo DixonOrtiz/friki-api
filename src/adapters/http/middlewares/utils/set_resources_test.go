@@ -19,6 +19,16 @@ func TestSetEmptyResources(t *testing.T) {
 	assert.Empty(t, resources)
 }
 
+func TestSetEmptyResourceWithAddressesInPath(t *testing.T) {
+	path := "/users/test_user_id/addresses"
+	c, _ := gin.CreateTestContext(httptest.NewRecorder())
+
+	resources := SetResources(path, c)
+
+	assert.Len(t, resources, 0)
+	assert.Empty(t, resources)
+}
+
 func TestSetAddressResource(t *testing.T) {
 	path := "/users/test_user_id/addresses/test_address_id"
 	testAddressID := "test_address_id"
