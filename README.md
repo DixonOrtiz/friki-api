@@ -48,9 +48,9 @@ go test ./... -count=1
 
 ## Features 
 
-✅: Implemented and tested
-⚠️: Implemented and not tested
-🔴: Not implemented
+✅: Implemented and tested <br/>
+⚠️: Implemented and not tested <br/>
+🔴: Not implemented <br/>
 
 - Login:
   - Google OAuth2 ✅
