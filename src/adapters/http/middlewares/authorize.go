@@ -13,14 +13,13 @@ func (m Middlewares) Authorize() gin.HandlerFunc {
 		tokenUserID, _ := c.Get("user_id")
 		userID := c.Param("user_id")
 
-		resources := utils.SetResources(c)
+		resources := utils.SetResources(c.Request.URL.Path, c)
 
 		err := m.PermissionUseCases.Authorize(
 			tokenUserID.(string),
 			userID,
 			resources,
 		)
-
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, httpinfra.Response{
 				Error: err.Error(),

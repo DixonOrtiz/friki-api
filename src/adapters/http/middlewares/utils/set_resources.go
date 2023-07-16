@@ -7,12 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetResources(c *gin.Context) map[string]string {
+func SetResources(path string, c *gin.Context) map[string]string {
 	resources := make(map[string]string)
-	path := c.Request.URL.Path
 
-	if strings.Contains(path, permissions.ADDRESSES) {
-		resources[permissions.ADDRESSES] = c.Param("address_id")
+	if strings.Contains(path, permissions.ADDRESSES_PATH) {
+		resources[permissions.ADDRESS_ID] = c.Param(permissions.ADDRESS_ID)
 	}
 
 	return resources

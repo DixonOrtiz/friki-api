@@ -1,5 +1,7 @@
 package permissions
 
 var (
-	ADDRESSES = "addresses"
+	ADDRESS        = "address"
+	ADDRESS_ID     = "address_id"
+	ADDRESSES_PATH = "addresses/"
 )

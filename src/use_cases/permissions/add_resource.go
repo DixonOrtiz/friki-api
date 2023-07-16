@@ -17,7 +17,7 @@ func (u PermissionUseCases) AddResource(
 	}
 
 	switch resource {
-	case permissions.ADDRESSES:
+	case permissions.ADDRESS:
 		permission.Addresses = append(permission.Addresses, resourceID)
 		err = u.PermissionRepository.AddResource(document, permission)
 		if err != nil {

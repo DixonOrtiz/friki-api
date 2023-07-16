@@ -25,7 +25,7 @@ func (u PermissionUseCases) Authorize(
 		for resource, ID := range resources {
 			userResource := permissions.GetResourceByName(resource, permission)
 
-			if !slices.Exist(userResource, ID) {
+			if !slices.Exists(userResource, ID) {
 				return errors.New(
 					errors.UNAUTHORIZED,
 					fmt.Sprintf("the requested resource (%s) is not owned by this user", resource),
