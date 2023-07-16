@@ -29,5 +29,5 @@ func TestSetAddressResource(t *testing.T) {
 	resources := SetResources(path, c)
 
 	assert.Len(t, resources, 1)
-	assert.Equal(t, testAddressID, resources[permissions.ADDRESS_ID])
+	assert.Equal(t, testAddressID, resources[permissions.ADDRESS])
 }
