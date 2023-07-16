@@ -40,8 +40,7 @@ go run main.go
 
 ## How To Test
 
-This project reach to program unit tests for use cases which implement the business logic
-and for the utils functions that support the app with abstract logic.
+This project seeks to program unit tests for use cases that implement business logic and for utils that support the application with abstract logic.
 
 ```
 go test ./... -count=1
