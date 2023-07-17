@@ -1,7 +1,7 @@
 package addresshttp
 
 import (
-	"frikiapi/src/adapters/http/controllers/addresses/types"
+	"frikiapi/src/adapters/http/controllers/addresses/input"
 	httputils "frikiapi/src/adapters/http/utils"
 	"frikiapi/src/entities"
 	httpinfra "frikiapi/src/infraestructure/http"
@@ -12,7 +12,7 @@ import (
 )
 
 func (co AddressControllers) Create(c *gin.Context) {
-	var body types.CreateAddressDTO
+	var body input.CreateAddressDTO
 	userID, exists := c.Get("user_id")
 	if !exists {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{

@@ -1,4 +1,4 @@
-package types
+package input
 
 type CreateAddressDTO struct {
 	Name             string `json:"name" binding:"required"`
