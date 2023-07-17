@@ -1,32 +1,32 @@
 package addressusecases
 
 import (
+	"fmt"
 	"frikiapi/src/entities"
+	"frikiapi/src/utils/errors"
+	"time"
 )
 
-func (u AddressUseCases) Update() (entities.Address, error) {
-	return entities.Address{}, nil
-	// foundUser, document, err := u.AddressRepository.GetByID()
-	// if err != nil {
-	// 	return errors.New(errors.INTERNAL, err)
-	// }
+func (u AddressUseCases) Update(address entities.Address) error {
+	foundAddress, document, err := u.AddressRepository.GetByID(address.ID)
+	if err != nil {
+		return errors.New(errors.INTERNAL, err)
+	}
 
-	// if foundUser.ID == "" {
-	// 	return errors.New(errors.NOT_FOUND, fmt.Sprintf(
-	// 		"user with id '%s' is not in the registers",
-	// 		user.ID,
-	// 	))
-	// }
+	if foundAddress.ID == "" {
+		return errors.New(errors.NOT_FOUND, fmt.Sprintf(
+			"address with id '%s' is not in the registers",
+			address.ID,
+		))
+	}
 
-	// user.ExternalID = foundUser.ExternalID
-	// user.Email = foundUser.Email
-	// user.UpdatedAt = time.Now()
-	// user.CreatedAt = foundUser.CreatedAt
+	address.UpdatedAt = time.Now()
+	address.CreatedAt = foundAddress.CreatedAt
 
-	// err = u.UserRepository.Update(document, user)
-	// if err != nil {
-	// 	return errors.New(errors.INTERNAL, err)
-	// }
+	err = u.AddressRepository.Update(document, address)
+	if err != nil {
+		return errors.New(errors.INTERNAL, err)
+	}
 
-	// return nil
+	return nil
 }

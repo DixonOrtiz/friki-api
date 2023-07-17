@@ -50,6 +50,7 @@ go test ./... -count=1
 
 ✅: Implemented and tested <br/>
 ⚠️: Implemented and not tested <br/>
+⚙️: In progress
 📅: To implement <br/>
 💡: Idea for the future <br/>
 
@@ -74,7 +75,7 @@ go test ./... -count=1
 - Addresses: 
   - Create ✅
   - GetByID ✅
-  - Update 📅
+  - Update ✅
   - Delete 📅
 
 - Stores:
