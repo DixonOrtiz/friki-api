@@ -50,7 +50,7 @@ go test ./... -count=1
 
 ✅: Implemented and tested <br/>
 ⚠️: Implemented and not tested <br/>
-⚙️: In progress
+⚙️: In progress <br/>
 📅: To implement <br/>
 💡: Idea for the future <br/>
 
