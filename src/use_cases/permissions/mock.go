@@ -24,3 +24,8 @@ func (m *MockPermissionUseCases) Authorize(JWTUserID string, userID string, reso
 	args := m.Called()
 	return args.Error(0)
 }
+
+func (m *MockPermissionUseCases) RemoveResource(resource string, userID string, resourceID string) error {
+	args := m.Called()
+	return args.Error(0)
+}

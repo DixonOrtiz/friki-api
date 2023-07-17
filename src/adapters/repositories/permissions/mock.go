@@ -15,7 +15,7 @@ func (m *MockPermissionRepository) Create(permission entities.Permission) error 
 	return args.Error(0)
 }
 
-func (m *MockPermissionRepository) AddResource(document string, permission entities.Permission) error {
+func (m *MockPermissionRepository) UpdateResource(document string, permission entities.Permission) error {
 	args := m.Called()
 	return args.Error(0)
 }

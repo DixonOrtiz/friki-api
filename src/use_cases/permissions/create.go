@@ -4,14 +4,12 @@ import (
 	"frikiapi/src/entities"
 	"frikiapi/src/utils/errors"
 
-	"github.com/google/uuid"
+	"frikiapi/src/utils/uuid"
 )
 
 func (u PermissionUseCases) Create(userID string) (entities.Permission, error) {
-	uid := uuid.New()
-
 	permission := entities.Permission{
-		ID:        uid.String(),
+		ID:        uuid.New(),
 		UserID:    userID,
 		Addresses: []string{},
 	}

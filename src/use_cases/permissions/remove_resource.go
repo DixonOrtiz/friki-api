@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"frikiapi/src/utils/errors"
 	"frikiapi/src/utils/permissions"
+	"frikiapi/src/utils/slices"
 )
 
-func (u PermissionUseCases) AddResource(
+func (u PermissionUseCases) RemoveResource(
 	resource string,
 	userID string,
 	resourceID string,
@@ -18,17 +19,18 @@ func (u PermissionUseCases) AddResource(
 
 	switch resource {
 	case permissions.ADDRESS:
-		permission.Addresses = append(permission.Addresses, resourceID)
+		permission.Addresses = slices.RemoveElement(permission.Addresses, resourceID)
 		err = u.PermissionRepository.UpdateResource(document, permission)
-		if err != nil {
-			return errors.New(errors.INTERNAL, err)
-		}
 
 	default:
 		return errors.New(errors.CONFLICT, fmt.Sprintf(
 			"'%s' resource is not supported",
 			resource,
 		))
+	}
+
+	if err != nil {
+		return errors.New(errors.INTERNAL, err)
 	}
 
 	return nil

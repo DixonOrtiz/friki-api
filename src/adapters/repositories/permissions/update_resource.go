@@ -6,7 +6,7 @@ import (
 	"frikiapi/src/entities"
 )
 
-func (r *PermissionRepository) AddResource(
+func (r *PermissionRepository) UpdateResource(
 	document string,
 	permission entities.Permission,
 ) error {

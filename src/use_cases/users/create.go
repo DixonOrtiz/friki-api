@@ -6,7 +6,7 @@ import (
 	"frikiapi/src/utils/permissions"
 	"time"
 
-	"github.com/google/uuid"
+	"frikiapi/src/utils/uuid"
 )
 
 func (u UserUseCases) Create(user entities.User) (string, bool, error) {
@@ -19,10 +19,9 @@ func (u UserUseCases) Create(user entities.User) (string, bool, error) {
 		return foundUser.ID, false, nil
 	}
 
-	uid := uuid.New()
 	now := time.Now()
 
-	user.ID = uid.String()
+	user.ID = uuid.New()
 	user.Role = permissions.USER
 	user.UpdatedAt = now
 	user.CreatedAt = now

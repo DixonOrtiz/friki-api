@@ -50,7 +50,8 @@ go test ./... -count=1
 
 ✅: Implemented and tested <br/>
 ⚠️: Implemented and not tested <br/>
-🔴: Not implemented <br/>
+📅: To implement <br/>
+💡: Idea for the future <br/>
 
 - Login:
   - Google OAuth2 ✅
@@ -62,8 +63,8 @@ go test ./... -count=1
 - Permissions: 
   - Create ✅
   - Add resource ✅
-  - Authorize ⚠️ 
-  - Remove resource 🔴
+  - Authorize ✅ 
+  - Remove resource ✅
 
 - Users:
   - Update ✅
@@ -73,13 +74,17 @@ go test ./... -count=1
 - Addresses: 
   - Create ✅
   - GetByID ✅
-  - Update 🔴
-  - Delete 🔴
+  - Update 📅
+  - Delete 📅
 
-- Stores: 🔴
-- Products: 🔴
-- Ecommerce: 🔴
-- Logistics: 🔴
+- Stores:
+  - Create 📅
+  - GetByID 📅
+  - Update 📅
+  
+- Products: 💡
+- Ecommerce: 💡
+- Logistics: 💡
 
 
 

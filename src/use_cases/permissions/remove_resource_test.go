@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAddResourceWithErrorGettingPermissionByID(t *testing.T) {
+func TestRemoveResourceWithErrorGettingPermissionByID(t *testing.T) {
 	permissionRepository := new(permrepo.MockPermissionRepository)
 	permissionRepository.On("GetByUserID").Return(
 		entities.Permission{},
@@ -19,19 +19,15 @@ func TestAddResourceWithErrorGettingPermissionByID(t *testing.T) {
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.AddResource(permissions.ADDRESS, "test_user_id", "test_resource_id")
+	err := permissionUseCases.RemoveResource(permissions.ADDRESS, testUserID, testFirstAddressID)
 
 	assert.ErrorContains(t, err, "internal: there was an error getting the permission")
 }
 
-func TestAddAddressResource(t *testing.T) {
+func TestRemoveAddressResource(t *testing.T) {
 	permissionRepository := new(permrepo.MockPermissionRepository)
 	permissionRepository.On("GetByUserID").Return(
-		entities.Permission{
-			ID:        "test_id",
-			UserID:    "user_id",
-			Addresses: []string{},
-		},
+		testPermission,
 		"test_doc",
 		nil,
 	)
@@ -40,19 +36,15 @@ func TestAddAddressResource(t *testing.T) {
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.AddResource(permissions.ADDRESS, "test_user_id", "test_resource_id")
+	err := permissionUseCases.RemoveResource(permissions.ADDRESS, testUserID, testFirstAddressID)
 
 	assert.Nil(t, err)
 }
 
-func TestAddAddressResourceWithError(t *testing.T) {
+func TestRemoveAddressResourceWithError(t *testing.T) {
 	permissionRepository := new(permrepo.MockPermissionRepository)
 	permissionRepository.On("GetByUserID").Return(
-		entities.Permission{
-			ID:        "test_id",
-			UserID:    "user_id",
-			Addresses: []string{},
-		},
+		testPermission,
 		"test_doc",
 		nil,
 	)
@@ -61,23 +53,21 @@ func TestAddAddressResourceWithError(t *testing.T) {
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.AddResource(permissions.ADDRESS, "test_user_id", "test_address_id")
+	err := permissionUseCases.RemoveResource(permissions.ADDRESS, testUserID, testFirstAddressID)
 
 	assert.ErrorContains(t, err, "internal: there was an error adding permission resource")
 }
 
-func TestAddResourceWithErrorInResourceType(t *testing.T) {
+func TestRemoveResourceWithErrorInResourceType(t *testing.T) {
 	permissionRepository := new(permrepo.MockPermissionRepository)
 	permissionRepository.On("GetByUserID").Return(
-		entities.Permission{
-			ID: "test_id",
-		},
+		testPermission,
 		"test_doc",
 		nil,
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.AddResource("unsupported_resource", "test_user_id", "test_resource_id")
+	err := permissionUseCases.RemoveResource("unsupported_resource", testUserID, testFirstAddressID)
 
 	assert.ErrorContains(t, err, "conflict: 'unsupported_resource' resource is not supported")
 }

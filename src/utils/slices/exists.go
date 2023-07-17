@@ -1,8 +1,8 @@
 package slices
 
-func Exists(slice []string, valueToFind string) bool {
+func Exists(slice []string, element string) bool {
 	for _, value := range slice {
-		if value == valueToFind {
+		if value == element {
 			return true
 		}
 	}

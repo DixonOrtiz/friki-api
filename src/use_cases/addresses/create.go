@@ -4,16 +4,14 @@ import (
 	"frikiapi/src/entities"
 	"frikiapi/src/utils/errors"
 	"frikiapi/src/utils/permissions"
+	"frikiapi/src/utils/uuid"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 func (u AddressUseCases) Create(address entities.Address) (entities.Address, error) {
-	uid := uuid.New()
 	now := time.Now()
 
-	address.ID = uid.String()
+	address.ID = uuid.New()
 	address.CreatedAt = now
 	address.UpdatedAt = now
 
