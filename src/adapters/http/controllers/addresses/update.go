@@ -22,7 +22,7 @@ func (co AddressControllers) Update(c *gin.Context) {
 		return
 	}
 
-	err = input.ValidateUpdateAddressParams(c)
+	err = input.ValidateUserIDAndAddressIDParams(c)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
 			Error: err.Error,

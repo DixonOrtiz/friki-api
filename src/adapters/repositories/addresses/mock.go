@@ -24,3 +24,8 @@ func (m *MockAddressRepository) Update(document string, address entities.Address
 	args := m.Called()
 	return args.Error(0)
 }
+
+func (m *MockAddressRepository) Delete(document string) error {
+	args := m.Called()
+	return args.Error(0)
+}

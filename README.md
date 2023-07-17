@@ -70,7 +70,7 @@ go test ./... -count=1
 |**Addresses**|Create|✅|
 ||Get by ID|✅|
 ||Update|✅|
-||Delete|📅|
+||Delete|⚙️|
 |**Stores**|Create|📅|
 ||Get by ID|📅|
 ||Update|📅|

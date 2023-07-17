@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ValidateUpdateAddressParams(c *gin.Context) error {
+func ValidateUserIDAndAddressIDParams(c *gin.Context) error {
 	message := "%s is required in request param"
 
 	userID := c.Param("user_id")
