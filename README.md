@@ -76,6 +76,11 @@ go test ./... -count=1
   - Update 🔴
   - Delete 🔴
 
+- Stores: 🔴
+- Products: 🔴
+- Ecommerce: 🔴
+- Logistics: 🔴
+
 
 
 

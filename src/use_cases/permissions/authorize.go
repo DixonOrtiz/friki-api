@@ -13,7 +13,10 @@ func (u PermissionUseCases) Authorize(
 	resources map[string]string,
 ) error {
 	if userID != JWTUserID {
-		return errors.New(errors.UNAUTHORIZED, "path user_id and token user_id are not the same")
+		return errors.New(
+			errors.UNAUTHORIZED,
+			"path user_id and token user_id are not the same",
+		)
 	}
 
 	if len(resources) > 0 {
@@ -32,7 +35,6 @@ func (u PermissionUseCases) Authorize(
 				)
 			}
 		}
-
 	}
 
 	return nil
