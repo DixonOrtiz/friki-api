@@ -70,11 +70,11 @@ go test ./... -count=1
 |**Addresses**|Create|✅|
 ||Get by ID|✅|
 ||Update|✅|
-||Delete|⚙️|
+||Delete|✅|
+||Get by user ID|📅|
 |**Stores**|Create|📅|
 ||Get by ID|📅|
 ||Update|📅|
-
 <br/>
 
 - Products: 💡

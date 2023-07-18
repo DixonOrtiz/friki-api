@@ -2,6 +2,8 @@ package addressusecases
 
 import "frikiapi/src/entities"
 
+var testAddressID = "test_address_id"
+
 var testAddress = entities.Address{
 	ID:               "test_address_id",
 	UserID:           "test_user_id",
