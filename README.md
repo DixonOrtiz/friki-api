@@ -71,7 +71,7 @@ go test ./... -count=1
 ||Get by ID|✅|
 ||Update|✅|
 ||Delete|✅|
-||Get by user ID|📅|
+||Get by user ID|✅|
 |**Stores**|Create|📅|
 ||Get by ID|📅|
 ||Update|📅|
