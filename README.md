@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <img src="./logo-daistore.png" alt="dai-store" width="200">
+  <img src="./logo-daistore.jpeg" alt="dai-store" width="200">
   <br>
   Friki API
   <br>
