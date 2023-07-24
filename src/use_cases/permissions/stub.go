@@ -12,4 +12,10 @@ var (
 			testFirstAddressID,
 		},
 	}
+	emptyPermission = entities.Permission{
+		ID:        "test_id",
+		UserID:    "user_id",
+		Addresses: []string{},
+		Stores:    []string{},
+	}
 )

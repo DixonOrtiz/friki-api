@@ -4,6 +4,7 @@ import (
 	addressrepo "frikiapi/src/adapters/repositories/addresses"
 	oauthrepo "frikiapi/src/adapters/repositories/oauth"
 	permrepo "frikiapi/src/adapters/repositories/permissions"
+	storerepo "frikiapi/src/adapters/repositories/stores"
 	userrepo "frikiapi/src/adapters/repositories/users"
 	googleuserrepo "frikiapi/src/adapters/repositories/users/google"
 )
@@ -14,6 +15,7 @@ func (a *Assembler) setRepositories() {
 	a.setExternalUserRepository()
 	a.setAddressRepository()
 	a.setPermissionRepository()
+	a.setStoreRepository()
 }
 
 func (a *Assembler) setUserRepository() {
@@ -36,4 +38,8 @@ func (a *Assembler) setAddressRepository() {
 
 func (a *Assembler) setPermissionRepository() {
 	a.repositories.Permission = permrepo.MakePermissionRepository(a.infraestructure.DB)
+}
+
+func (a *Assembler) setStoreRepository() {
+	a.repositories.Store = storerepo.MakeStoreRepository(a.infraestructure.DB)
 }

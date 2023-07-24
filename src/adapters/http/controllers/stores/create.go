@@ -1,7 +1,7 @@
-package userhttp
+package storehttp
 
 import (
-	"frikiapi/src/adapters/http/controllers/users/input"
+	"frikiapi/src/adapters/http/controllers/stores/input"
 	httputils "frikiapi/src/adapters/http/utils"
 	"frikiapi/src/entities"
 	httpinfra "frikiapi/src/infraestructure/http"
@@ -11,14 +11,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func (co UserControllers) Update(c *gin.Context) {
-	var body input.UpdateUserDTO
-
-	ID := c.Param("user_id")
-	if ID == "" {
+func (co StoreControllers) Create(c *gin.Context) {
+	var body input.CreateStoreDTO
+	userID, exists := c.Get("user_id")
+	if !exists {
 		c.JSON(http.StatusBadRequest, httpinfra.Response{
-			Error: errors.New(errors.BAD_REQUEST, "user_id is required in path").Error(),
-		})
+			Error: errors.New(
+				errors.BAD_REQUEST,
+				"user_id is required in header auth token",
+			)})
 		return
 	}
 
@@ -30,11 +31,10 @@ func (co UserControllers) Update(c *gin.Context) {
 		return
 	}
 
-	err = co.UserUseCases.Update(entities.User{
-		ID:       ID,
-		Name:     body.Name,
-		LastName: body.LastName,
-		Picture:  body.Picture,
+	_, err = co.StoreUseCases.Create(entities.Store{
+		UserID:      userID.(string),
+		Name:        body.Name,
+		Description: body.Description,
 	})
 	if err != nil {
 		c.JSON(errors.GetStatusByErr(err), httpinfra.Response{
@@ -44,6 +44,6 @@ func (co UserControllers) Update(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, httpinfra.Response{
-		Message: "user updated successfully",
+		Message: "store created successfully",
 	})
 }

@@ -20,15 +20,20 @@ func (u PermissionUseCases) AddResource(
 	case permissions.ADDRESS:
 		permission.Addresses = append(permission.Addresses, resourceID)
 		err = u.PermissionRepository.UpdateResource(document, permission)
-		if err != nil {
-			return errors.New(errors.INTERNAL, err)
-		}
+
+	case permissions.STORE:
+		permission.Stores = append(permission.Stores, resourceID)
+		err = u.PermissionRepository.UpdateResource(document, permission)
 
 	default:
 		return errors.New(errors.CONFLICT, fmt.Sprintf(
 			"'%s' resource is not supported",
 			resource,
 		))
+	}
+
+	if err != nil {
+		return errors.New(errors.INTERNAL, err)
 	}
 
 	return nil

@@ -27,11 +27,7 @@ func TestAddResourceWithErrorGettingPermissionByID(t *testing.T) {
 func TestAddAddressResource(t *testing.T) {
 	permissionRepository := new(permrepo.MockPermissionRepository)
 	permissionRepository.On("GetByUserID").Return(
-		entities.Permission{
-			ID:        "test_id",
-			UserID:    "user_id",
-			Addresses: []string{},
-		},
+		emptyPermission,
 		"test_doc",
 		nil,
 	)
@@ -48,11 +44,41 @@ func TestAddAddressResource(t *testing.T) {
 func TestAddAddressResourceWithError(t *testing.T) {
 	permissionRepository := new(permrepo.MockPermissionRepository)
 	permissionRepository.On("GetByUserID").Return(
-		entities.Permission{
-			ID:        "test_id",
-			UserID:    "user_id",
-			Addresses: []string{},
-		},
+		emptyPermission,
+		"test_doc",
+		nil,
+	)
+	permissionRepository.On("UpdateResource").Return(
+		goerrors.New("there was an error adding permission resource"),
+	)
+	permissionUseCases := MakePermissionUseCases(permissionRepository)
+
+	err := permissionUseCases.AddResource(permissions.ADDRESS, "test_user_id", "test_address_id")
+
+	assert.ErrorContains(t, err, "internal: there was an error adding permission resource")
+}
+
+func TestAddStoreResource(t *testing.T) {
+	permissionRepository := new(permrepo.MockPermissionRepository)
+	permissionRepository.On("GetByUserID").Return(
+		emptyPermission,
+		"test_doc",
+		nil,
+	)
+	permissionRepository.On("UpdateResource").Return(
+		nil,
+	)
+	permissionUseCases := MakePermissionUseCases(permissionRepository)
+
+	err := permissionUseCases.AddResource(permissions.ADDRESS, "test_user_id", "test_resource_id")
+
+	assert.Nil(t, err)
+}
+
+func TestAddAddressResourceWithError(t *testing.T) {
+	permissionRepository := new(permrepo.MockPermissionRepository)
+	permissionRepository.On("GetByUserID").Return(
+		emptyPermission,
 		"test_doc",
 		nil,
 	)
@@ -69,9 +95,7 @@ func TestAddAddressResourceWithError(t *testing.T) {
 func TestAddResourceWithErrorInResourceType(t *testing.T) {
 	permissionRepository := new(permrepo.MockPermissionRepository)
 	permissionRepository.On("GetByUserID").Return(
-		entities.Permission{
-			ID: "test_id",
-		},
+		testPermission,
 		"test_doc",
 		nil,
 	)

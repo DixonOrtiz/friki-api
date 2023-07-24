@@ -2,6 +2,7 @@ package assembler
 
 import (
 	addresshttp "frikiapi/src/adapters/http/controllers/addresses"
+	storehttp "frikiapi/src/adapters/http/controllers/stores"
 	userhttp "frikiapi/src/adapters/http/controllers/users"
 	mid "frikiapi/src/adapters/http/middlewares"
 )
@@ -11,6 +12,7 @@ func (a *Assembler) setRoutes() {
 	a.setOAuthRoutes()
 	a.setUserRoutes()
 	a.setAddressRoutes()
+	a.setStoreRoutes()
 }
 
 func (a *Assembler) useMiddlewares() {
@@ -32,4 +34,8 @@ func (a *Assembler) setUserRoutes() {
 
 func (a *Assembler) setAddressRoutes() {
 	addresshttp.SetRoutes(a.infraestructure.ProtectedRouter, a.controllers.Address)
+}
+
+func (a *Assembler) setStoreRoutes() {
+	storehttp.SetRoutes(a.infraestructure.ProtectedRouter, a.controllers.Store)
 }
