@@ -12,6 +12,7 @@ func (u PermissionUseCases) Create(userID string) (entities.Permission, error) {
 		ID:        uuid.New(),
 		UserID:    userID,
 		Addresses: []string{},
+		Stores:    []string{},
 	}
 
 	err := u.PermissionRepository.Create(

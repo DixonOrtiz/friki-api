@@ -36,7 +36,7 @@ func TestAddAddressResource(t *testing.T) {
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.AddResource(permissions.ADDRESS, "test_user_id", "test_resource_id")
+	err := permissionUseCases.AddResource(permissions.ADDRESS, "test_user_id", "test_address_id")
 
 	assert.Nil(t, err)
 }
@@ -70,12 +70,12 @@ func TestAddStoreResource(t *testing.T) {
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.AddResource(permissions.ADDRESS, "test_user_id", "test_resource_id")
+	err := permissionUseCases.AddResource(permissions.STORE, "test_user_id", "test_store_id")
 
 	assert.Nil(t, err)
 }
 
-func TestAddAddressResourceWithError(t *testing.T) {
+func TestAddStoreResourceWithError(t *testing.T) {
 	permissionRepository := new(permrepo.MockPermissionRepository)
 	permissionRepository.On("GetByUserID").Return(
 		emptyPermission,
@@ -87,7 +87,7 @@ func TestAddAddressResourceWithError(t *testing.T) {
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.AddResource(permissions.ADDRESS, "test_user_id", "test_address_id")
+	err := permissionUseCases.AddResource(permissions.STORE, "test_user_id", "test_store_id")
 
 	assert.ErrorContains(t, err, "internal: there was an error adding permission resource")
 }

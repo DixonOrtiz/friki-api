@@ -35,6 +35,7 @@ func TestCreatePermissionWithSuccess(t *testing.T) {
 		ID:        permission.ID,
 		UserID:    userID,
 		Addresses: []string{},
+		Stores:    []string{},
 	}
 
 	assert.Equal(t, expectedPermission, permission)

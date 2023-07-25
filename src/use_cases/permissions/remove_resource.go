@@ -22,6 +22,10 @@ func (u PermissionUseCases) RemoveResource(
 		permission.Addresses = slices.RemoveElement(permission.Addresses, resourceID)
 		err = u.PermissionRepository.UpdateResource(document, permission)
 
+	case permissions.STORE:
+		permission.Stores = slices.RemoveElement(permission.Stores, resourceID)
+		err = u.PermissionRepository.UpdateResource(document, permission)
+
 	default:
 		return errors.New(errors.CONFLICT, fmt.Sprintf(
 			"'%s' resource is not supported",

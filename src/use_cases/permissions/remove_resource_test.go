@@ -49,13 +49,47 @@ func TestRemoveAddressResourceWithError(t *testing.T) {
 		nil,
 	)
 	permissionRepository.On("UpdateResource").Return(
-		goerrors.New("there was an error adding permission resource"),
+		goerrors.New("there was an error removing permission resource"),
 	)
 	permissionUseCases := MakePermissionUseCases(permissionRepository)
 
-	err := permissionUseCases.RemoveResource(permissions.ADDRESS, testUserID, testFirstAddressID)
+	err := permissionUseCases.RemoveResource(permissions.STORE, testUserID, testFirstStoreID)
 
-	assert.ErrorContains(t, err, "internal: there was an error adding permission resource")
+	assert.ErrorContains(t, err, "internal: there was an error removing permission resource")
+}
+
+func TestRemoveStoreResource(t *testing.T) {
+	permissionRepository := new(permrepo.MockPermissionRepository)
+	permissionRepository.On("GetByUserID").Return(
+		testPermission,
+		"test_doc",
+		nil,
+	)
+	permissionRepository.On("UpdateResource").Return(
+		nil,
+	)
+	permissionUseCases := MakePermissionUseCases(permissionRepository)
+
+	err := permissionUseCases.RemoveResource(permissions.STORE, testUserID, testFirstStoreID)
+
+	assert.Nil(t, err)
+}
+
+func TestRemoveStoreResourceWithError(t *testing.T) {
+	permissionRepository := new(permrepo.MockPermissionRepository)
+	permissionRepository.On("GetByUserID").Return(
+		emptyPermission,
+		"test_doc",
+		nil,
+	)
+	permissionRepository.On("UpdateResource").Return(
+		goerrors.New("there was an error removing permission resource"),
+	)
+	permissionUseCases := MakePermissionUseCases(permissionRepository)
+
+	err := permissionUseCases.RemoveResource(permissions.STORE, testUserID, testFirstStoreID)
+
+	assert.ErrorContains(t, err, "internal: there was an error removing permission resource")
 }
 
 func TestRemoveResourceWithErrorInResourceType(t *testing.T) {
