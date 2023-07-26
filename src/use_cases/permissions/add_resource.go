@@ -19,11 +19,9 @@ func (u PermissionUseCases) AddResource(
 	switch resource {
 	case permissions.ADDRESS:
 		permission.Addresses = append(permission.Addresses, resourceID)
-		err = u.PermissionRepository.UpdateResource(document, permission)
 
 	case permissions.STORE:
 		permission.Stores = append(permission.Stores, resourceID)
-		err = u.PermissionRepository.UpdateResource(document, permission)
 
 	default:
 		return errors.New(errors.CONFLICT, fmt.Sprintf(
@@ -31,6 +29,8 @@ func (u PermissionUseCases) AddResource(
 			resource,
 		))
 	}
+
+	err = u.PermissionRepository.UpdateResource(document, permission)
 
 	if err != nil {
 		return errors.New(errors.INTERNAL, err)

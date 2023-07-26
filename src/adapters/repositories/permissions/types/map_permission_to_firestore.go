@@ -9,5 +9,6 @@ func MapPermissionToFirestore(permission entities.Permission) FirestorePermissio
 		ID:        permission.ID,
 		UserID:    permission.UserID,
 		Addresses: permission.Addresses,
+		Stores:    permission.Stores,
 	}
 }
