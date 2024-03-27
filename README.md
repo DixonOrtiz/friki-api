@@ -1,13 +1,3 @@
-<h1 align="center">
-  <br>
-  <img src="./logo-daistore.jpeg" alt="dai-store" width="200">
-  <br>
-  Friki API
-  <br>
-</h1>
-
-<h4 align="center">Dai Store business logic</h4>
-
 <p align="center">
   <a href="#description">Description</a> •  
   <a href="#how-to-run">How To Run</a> •  
@@ -72,9 +62,6 @@ go test ./... -count=1
 ||Update|✅|
 ||Delete|✅|
 ||Get by user ID|✅|
-|**Stores**|Create|⚠️|
-||Get by ID|📅|
-||Update|📅|
 <br/>
 
 - Products: 💡
