@@ -7,7 +7,7 @@
 
 ## Description
 
-- REST API developed in Go with the purpose of being the backend of Dai Store
+- REST API developed in Go
 - Implements Clean Archicture which allows to distribute this project in different logic layers:
   - Infraestructure: dependencies configurations
   - Adapters: dependencies implementations
